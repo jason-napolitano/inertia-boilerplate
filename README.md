@@ -12,6 +12,7 @@ Below lists the included packages and features:
    - `chart.js` and `vue-chart3`
    - `unplugin-vue-components`
    - `unplugin-auto-import`
+   - `lucide-vue-next`
    - `vue3-openlayers`
    - `element-plus`
    - `tailwind.css`

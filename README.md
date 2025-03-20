@@ -3,6 +3,7 @@
 
 Below lists the included packages and features:
  - Laravel Pacakges
+   - [`staudenmeir/belongs-to-through`](https://packagist.org/packages/staudenmeir/belongs-to-through)
    - [`barryvdh/laravel-debugbar`](https://packagist.org/packages/barryvdh/laravel-debugbar)
    - [`laravel-permission`](https://packagist.org/packages/spatie/laravel-permission)
    - [`laravel/telescope`](https://packagist.org/packages/laravel/telescope)
@@ -26,3 +27,4 @@ Below lists the included packages and features:
  - Included features
    - Composables directory containing useful functions
    - Full dashboard and frontend layouts
+   - An auto-discovered `helpers.php`file

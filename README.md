@@ -3,10 +3,10 @@
 
 Below lists the included packages and features:
  - Laravel Pacakges
-   - Debugging w/ [`barryvdh/laravel-debugbar`](https://packagist.org/packages/barryvdh/laravel-debugbar)
-   - Authorization w/ [`laravel-permission`](https://packagist.org/packages/spatie/laravel-permission)
-   - Debugging w/ [`laravel/telescope`](https://packagist.org/packages/laravel/telescope)
-   - Unit Testing w/ [`pest`](https://packagist.org/packages/pestphp/pest)
+   - [`barryvdh/laravel-debugbar`](https://packagist.org/packages/barryvdh/laravel-debugbar)
+   - [`laravel-permission`](https://packagist.org/packages/spatie/laravel-permission)
+   - [`laravel/telescope`](https://packagist.org/packages/laravel/telescope)
+   - [`pest`](https://packagist.org/packages/pestphp/pest)
  - InertiaJS & Vue3
    - [`@vueuse/core`](https://www.npmjs.com/package/@vueuse/core) and [`@vueuse/components`](https://www.npmjs.com/package/@vueuse/components)
    - [`chart.js`](https://www.npmjs.com/package/chart.js) and [`vue-chart3`](https://www.npmjs.com/package/vue-chart-3)

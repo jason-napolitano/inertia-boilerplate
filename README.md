@@ -8,13 +8,13 @@ Below lists the included packages and features:
    - Laravel Telescope
    - Pest Unit Testing
  - InertiaJS & Vue3
-   - `@vueuse/core` and `@vueuse/component`
-   - `chart.js` and `vue-chart3`
-   - `unplugin-vue-components`
-   - `unplugin-auto-import`
-   - `lucide-vue-next`
-   - `vue3-openlayers`
-   - `element-plus`
+   - [`@vueuse/core`](https://www.npmjs.com/package/@vueuse/core) and [`@vueuse/components`](https://www.npmjs.com/package/@vueuse/components)
+   - [`chart.js`](https://www.npmjs.com/package/chart.js) and [`vue-chart3`](https://www.npmjs.com/package/vue-chart-3)
+   - [`unplugin-vue-components`](https://www.npmjs.com/package/unplugin-vue-components)
+   - [`unplugin-auto-import`](https://www.npmjs.com/package/unplugin-auto-import)
+   - [`lucide-vue-next`](https://www.npmjs.com/package/lucide-vue-next)
+   - [`vue3-openlayers`](https://www.npmjs.com/package/vue3-openlayers)
+   - [`element-plus`](https://www.npmjs.com/package/element-plus)
    - `tailwind.css`
    - `fullcalendar`
    - `typescript`

@@ -12,13 +12,16 @@ Below lists the included packages and features:
    - `chart.js` and `vue-chart3`
    - `unplugin-vue-components`
    - `unplugin-auto-import`
+   - `vue3-openlayers`
    - `element-plus`
-   - `fullcalendar`
-   - `vue3-openlays`
    - `tailwind.css`
+   - `fullcalendar`
    - `typescript`
    - `inertia`
    - `vitest`
    - `pinia`
    - `maska`
    - `dayjs`
+ - Included features
+   - Composables directory containing useful functions
+   - Full dashboard and frontend layouts

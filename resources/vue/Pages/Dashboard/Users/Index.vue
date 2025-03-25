@@ -1,7 +1,38 @@
 <template>
   <DashboardLayout title="User Manager">
     <el-table :data="props.users['data']">
-      <el-table-column prop="name" label="Name" sortable />
+      <el-table-column label="Name" sortable>
+        <template #default="scope: TableRow">
+          <div class="flex justify-start space-x-2 items-center">
+            <div class="max-w-3.5 min-w-3.5">
+              <el-image
+                class="rounded-full h-3.5 mt-1.5"
+                :src="scope.row['profile_image']"
+              >
+                <template #error>
+                  <span>
+                    <el-icon>
+                      <Image />
+                    </el-icon>
+                  </span>
+                </template>
+              </el-image>
+            </div>
+            <div class="text-lg">
+              {{ scope.row['name'] }}
+            </div>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column label="Roles" width="100">
+        <template #default="scope: TableRow">
+          <el-button
+            v-text="scope.row.roles[0]['name']"
+            class="w-full"
+            size="small"
+          />
+        </template>
+      </el-table-column>
       <el-table-column prop="email" label="Email Address" sortable />
       <el-table-column label="Created">
         <template #default="scope: TableRow">
@@ -50,6 +81,7 @@ import { useDate } from '@/Composables/useDate'
 import { ElNotification } from 'element-plus'
 import { router } from '@inertiajs/vue3'
 import { usePage } from '@inertiajs/vue3'
+import { Image } from 'lucide-vue-next'
 
 // --------------------------------------------------------
 // table row interface

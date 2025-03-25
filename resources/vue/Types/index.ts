@@ -8,6 +8,7 @@ export interface DatabaseRecord {
 export interface User extends DatabaseRecord {
   email_verified_at?: string
   state_province: string
+  roles: RoleInterface[]
   profile_image: string
   salary_type: string
   country: string
@@ -21,6 +22,10 @@ export interface User extends DatabaseRecord {
 export interface PaginatedResults {
   data: DatabaseRecord[]
   links: object[]
+}
+
+interface RoleInterface {
+  name: string
 }
 
 export type PageProps<

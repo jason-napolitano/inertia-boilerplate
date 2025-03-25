@@ -3,9 +3,9 @@
 namespace App\Http\Controllers {
 
     use App\Http\Requests;
-    use Inertia\Response;
-    use Illuminate\Http;
     use App\Models\User;
+    use Illuminate\Http;
+    use Inertia\Response;
 
     class UserController extends Controller
     {
@@ -16,6 +16,11 @@ namespace App\Http\Controllers {
         {
             // collect users that are not deleted
             $users = User::withoutTrashed()->paginate(10);
+
+            $users->map(function ($user) {
+                $user['roles'] = $user->getRoleNames();
+                return $user;
+            });
 
             // render the inertia view
             return inertia('Dashboard/Users/Index', compact('users'));
@@ -77,7 +82,7 @@ namespace App\Http\Controllers {
 
                 // transform the image name to the users UUID
                 $ext = $file->getClientOriginalExtension();
-                $newFile = $user['id'] . '.' . $ext;
+                $newFile = substr($user['id'], -12) . '.' . $ext;
 
                 // store the file
                 $path = $file->storeAs('uploads/users', $newFile, 'public');

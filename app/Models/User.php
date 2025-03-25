@@ -13,6 +13,7 @@ namespace App\Models {
 
     /**
      * @method static create(array|Collection $data)
+     * @method static find(string|number $id)
      */
     class User extends Authenticatable
     {
@@ -54,11 +55,6 @@ namespace App\Models {
                 'email_verified_at' => 'datetime',
                 'password'          => 'hashed',
             ];
-        }
-
-        public function properties(): BelongsToMany
-        {
-            return $this->belongsToMany(Property::class)->withTimestamps();
         }
     }
 }

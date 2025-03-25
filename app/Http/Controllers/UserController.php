@@ -11,31 +11,38 @@ namespace App\Http\Controllers {
     {
         public function index(): Response
         {
+            // collect users that are not deleted
             $users = User::withoutTrashed()->paginate(10);
+
+            // render the inertia view
             return inertia('Dashboard/Users/Index', compact('users'));
         }
 
         public function show(User $user): Response
         {
-            $user['roles'] = $user->getRoleNames();
+            // render the inertia view
             return inertia('Dashboard/Users/Show', compact('user'));
         }
 
         public function update(Requests\UpdateUserProfile $request): Http\RedirectResponse
         {
+            // validate the request
             $request->validated();
 
-            $user = User::find(auth()->user()->id);
+            // locate the user
+            $user = User::find(auth()->user()['id']);
 
+            // update the user
             $user->address = $request['address'] ?? $user['address'];
             $user->email = $request['email'] ?? $user['email'];
             $user->phone = $request['phone'] ?? $user['phone'];
             $user->name = $request['name'] ?? $user['name'];
-
             $user->save();
 
+            // return the success message
             $request->session()->flash('message', 'Settings successfully updated.');
 
+            // redirect back
             return back();
         }
 
@@ -47,12 +54,12 @@ namespace App\Http\Controllers {
 
         public function uploadPhoto(Requests\UploadProfilePhoto $request): void
         {
-            // Validate the file
+            // validate the file
             $request->validated();
 
-            // Check if a file is uploaded
-            if ($request->hasFile('profile_image') && $request->file('profile_image')->isValid()) {
-                // Get the file from the request
+            // check if a file is uploaded
+            if ($request->hasFile('profile_image') && $request->file('profile_image')?->isValid()) {
+                // get the file from the request
                 $file = $request->file('profile_image');
 
                 // transform the image name to the users UUID

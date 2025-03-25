@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers {
 
-use Illuminate\Http\Request;
-use Inertia\Response;
+    use Inertia\Response;
 
-class WelcomeController extends Controller
-{
-    public function __invoke(): Response
+    class WelcomeController extends Controller
     {
-        return inertia('Welcome');
+        public function __invoke(): Response
+        {
+            // render the inertia view
+            return inertia('Welcome');
+        }
     }
 }

@@ -5,8 +5,8 @@
         <div class="img-container">
           <el-image
             :src="props.user['profile_image']"
-            fit="contain"
             class="img"
+            fit="cover"
             lazy
           >
             <template #placeholder>
@@ -165,16 +165,30 @@
 
                 <el-row>
                   <el-col :span="24">
-                    <button
-                      type="submit"
-                      class="border rounded py-1 px-2 w-full"
-                    >
+                    <button type="submit" class="el-button w-full">
                       Submit Profile Data
                     </button>
                   </el-col>
                 </el-row>
               </el-form>
             </section>
+          </el-tab-pane>
+
+          <el-tab-pane label="Profile Image">
+            <form
+              @submit.prevent="uploadImage"
+              class="flex flex-col space-y-4"
+              enctype="multipart/form-data"
+            >
+              <input
+                class="border rounded-sm px-2 py-1 file:text-sm"
+                @input="handleFileChange"
+                type="file"
+              />
+              <button type="submit" class="el-button w-full">
+                Upload Image
+              </button>
+            </form>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -187,7 +201,8 @@
 // imports
 import { Highlighter, BookUser, UserPen } from 'lucide-vue-next'
 import FlashMessage from '@/Layouts/Partials/FlashMessage.vue'
-import { Picture, Refresh } from '@element-plus/icons-vue'
+import 'element-plus/es/components/button/style/css'
+import { Refresh } from '@element-plus/icons-vue'
 import { useDate } from '@/Composables/useDate'
 import { useForm } from '@inertiajs/vue3'
 import { vMaska } from 'maska/vue'
@@ -204,23 +219,35 @@ const props = defineProps<{
 const date = useDate()
 
 // --------------------------------------------------------
-// form data
+// edit form
 const form = useForm({
   profile_image: null,
-  salary_type: null,
   country: null,
   address: null,
-  salary: null,
   phone: null,
   email: null,
   name: null,
 })
 
-// --------------------------------------------------------
-// form action
 const submitForm = () => {
   // @ts-expect-error Expected Ziggy error
-  form.patch(route('users.update', props.user))
+  form.patch(route('users.update', props.user), {
+    onSuccess: () => form.reset(),
+  })
+}
+
+// --------------------------------------------------------
+// profile image
+const imageForm = useForm({
+  profile_image: null,
+})
+
+const handleFileChange = (event: any) => {
+  imageForm.profile_image = event.target.files[0]
+}
+
+const uploadImage = () => {
+  imageForm.post(route('users.photo'))
 }
 </script>
 
@@ -236,8 +263,8 @@ const submitForm = () => {
 }
 
 .img {
-  min-height: 150px;
-  max-height: 150px;
+  min-height: 250px;
+  max-height: 250px;
   @apply dark:border-stone-600/60
     rounded-t-sm
     border-b-0
@@ -257,8 +284,8 @@ const submitForm = () => {
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 150px;
-  max-height: 150px;
+  min-height: 250px;
+  max-height: 250px;
   background: var(--el-fill-color-light);
   color: var(--el-text-color-secondary);
   font-size: 3rem;

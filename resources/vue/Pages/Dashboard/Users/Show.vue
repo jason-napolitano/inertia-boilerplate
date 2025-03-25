@@ -1,5 +1,5 @@
 <template>
-  <DashboardLayout title="Profile">
+  <DashboardLayout :title="props.user.name">
     <section class="flex space-x-4">
       <div class="w-1/6">
         <div class="img-container">
@@ -174,17 +174,39 @@
             </section>
           </el-tab-pane>
 
-          <el-tab-pane label="Profile Image">
+          <el-tab-pane>
+            <template #label>
+              <span class="tab-label">
+                <el-icon>
+                  <ImageUp />
+                </el-icon>
+                <span>Profile Image</span>
+              </span>
+            </template>
             <form
               @submit.prevent="uploadImage"
               class="flex flex-col space-y-4"
               enctype="multipart/form-data"
             >
-              <input
-                class="border rounded-sm px-2 py-1 file:text-sm"
-                @input="handleFileChange"
-                type="file"
-              />
+              <div
+                class="relative flex flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer"
+              >
+                <input
+                  class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
+                  @change="handleFileChange"
+                  type="file"
+                  multiple
+                />
+
+                <div
+                  class="flex flex-col items-center justify-center py-10 text-center"
+                >
+                  <p class="m-0">Drag your files here or click in this area.</p>
+                  <p class="mt-2 text-xs">
+                    <strong>{{ currentImage }}</strong>
+                  </p>
+                </div>
+              </div>
               <button type="submit" class="el-button w-full">
                 Upload Image
               </button>
@@ -199,13 +221,14 @@
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
-import { BookUser, Highlighter, UserPen } from 'lucide-vue-next'
+import { BookUser, Highlighter, UserPen, ImageUp } from 'lucide-vue-next'
 import FlashMessage from '@/Layouts/Partials/FlashMessage.vue'
 import 'element-plus/es/components/button/style/css'
 import { Refresh } from '@element-plus/icons-vue'
 import { useDate } from '@/Composables/useDate'
 import { useForm } from '@inertiajs/vue3'
 import { vMaska } from 'maska/vue'
+import { computed } from 'vue'
 import { User } from '@/Types'
 
 // --------------------------------------------------------
@@ -250,6 +273,12 @@ const uploadImage = () => {
   // @ts-expect-error expected ziggy error
   imageForm.post(route('users.photo', props.user))
 }
+
+const currentImage = computed(() =>
+  imageForm.profile_image
+    ? imageForm.profile_image['name']
+    : 'No image selected'
+)
 </script>
 
 <style scoped>

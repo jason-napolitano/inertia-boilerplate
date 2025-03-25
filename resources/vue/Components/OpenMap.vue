@@ -4,7 +4,6 @@
     :loadTilesWhileInteracting="true"
     :loadTilesWhileAnimating="true"
     v-loading="!center.length"
-    class="h-[29rem]"
   >
     <Map.OlView
       :projection="projection"
@@ -72,6 +71,7 @@ onBeforeMount(async () => {
     justify-center
     bg-stone-100
     w-full
+      h-[29rem]
     items-center
     text-6xl
     rounded

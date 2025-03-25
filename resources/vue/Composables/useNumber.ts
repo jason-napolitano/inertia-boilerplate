@@ -25,7 +25,7 @@ export function useNumber() {
   }
 
   /** --------------------------------------------
-   * Returns a currency friendly number
+   * Returns a percentage
    *
    * @param x {number}
    * @param y {number}

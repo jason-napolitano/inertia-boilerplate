@@ -6,6 +6,9 @@ namespace App\Http\Controllers {
 
     class DashboardController extends Controller
     {
+        /**
+         * Display the index view.
+         */
         public function __invoke(): Response
         {
             // render the inertia view

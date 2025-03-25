@@ -6,6 +6,9 @@ namespace App\Http\Controllers {
 
     class WelcomeController extends Controller
     {
+        /**
+         * Display the index view.
+         */
         public function __invoke(): Response
         {
             // render the inertia view

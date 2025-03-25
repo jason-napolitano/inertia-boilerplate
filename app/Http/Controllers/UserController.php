@@ -9,6 +9,9 @@ namespace App\Http\Controllers {
 
     class UserController extends Controller
     {
+        /**
+         * Display the index view.
+         */
         public function index(): Response
         {
             // collect users that are not deleted
@@ -18,12 +21,18 @@ namespace App\Http\Controllers {
             return inertia('Dashboard/Users/Index', compact('users'));
         }
 
+        /**
+         * Display the show view.
+         */
         public function show(User $user): Response
         {
             // render the inertia view
             return inertia('Dashboard/Users/Show', compact('user'));
         }
 
+        /**
+         * Update a user record.
+         */
         public function update(Requests\UpdateUserProfile $request): Http\RedirectResponse
         {
             // validate the request
@@ -46,12 +55,18 @@ namespace App\Http\Controllers {
             return back();
         }
 
+        /**
+         * Delete a user record.
+         */
         public function destroy(User $user): Http\RedirectResponse
         {
             $user->delete();
             return back();
         }
 
+        /**
+         * Upload a user's profile image.
+         */
         public function uploadPhoto(Requests\UploadProfilePhoto $request): void
         {
             // validate the file

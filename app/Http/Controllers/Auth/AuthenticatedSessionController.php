@@ -1,54 +1,65 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth {
 
-use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Inertia\Response;
-use Inertia\Inertia;
+    use App\Http\Requests\Auth\LoginRequest;
+    use Illuminate\Http\RedirectResponse;
+    use Illuminate\Support\Facades\Auth;
+    use App\Http\Controllers\Controller;
+    use Illuminate\Http\Request;
+    use Inertia\Response;
+    use Inertia\Inertia;
 
-class AuthenticatedSessionController extends Controller
-{
-    /**
-     * Display the login view.
-     */
-    public function index(): Response
+    class AuthenticatedSessionController extends Controller
     {
-        return Inertia::render('Auth/Login', [
-            'status' => session('status'),
-        ]);
-    }
+        /**
+         * Display the login view.
+         */
+        public function index(): Response
+        {
+            // render the inertia view
+            return Inertia::render('Auth/Login', [
+                'status' => session('status'),
+            ]);
+        }
 
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+        /**
+         * Handle an incoming authentication request.
+         */
+        public function store(LoginRequest $request): RedirectResponse
+        {
+            // validate the request
+            $request->authenticate();
 
-        $request->session()->regenerate();
+            // regenerate the session
+            $request->session()->regenerate();
 
-        $request->session()->flash('message', 'You have been logged in to your account.');
+            // return the success message
+            $request->session()->flash('message', 'You have been logged in to your account.');
 
-        return redirect()->intended(route('dashboard', absolute: false));
-    }
+            // redirect to the dashboard
+            return to_route('dashboard');
+        }
 
-    /**
-     * Destroy an authenticated session.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        Auth::guard('web')->logout();
+        /**
+         * Destroy an authenticated session.
+         */
+        public function destroy(Request $request): RedirectResponse
+        {
+            // log the user out
+            Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
+            // invalidate the session
+            $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+            // regenerate the token
+            $request->session()->regenerateToken();
 
-        $request->session()->flash('message', 'You have been logged out of your account.');
+            // return the success message
+            $request->session()->flash('message', 'You have been logged out of your account.');
 
-        return to_route('login.index');
+            // redirect to the login page
+            return to_route('login.index');
+        }
     }
 }

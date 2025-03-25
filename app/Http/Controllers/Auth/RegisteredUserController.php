@@ -20,6 +20,7 @@ namespace App\Http\Controllers\Auth {
          */
         public function index(): Response
         {
+            // render the inertia view
             return Inertia::render('Auth/Register');
         }
 
@@ -30,21 +31,24 @@ namespace App\Http\Controllers\Auth {
          */
         public function store(RegisterRequest $request): RedirectResponse
         {
+            // validate the request
             $request->validated();
 
+            // create the user
             $user = User::create([
                 'name'     => $request['name'],
                 'email'    => $request['email'],
                 'password' => Hash::make($request['password']),
             ]);
 
+            // assign the default role (member)
             $user->assignRole(env('APP_DEFAULT_ROLE'));
 
-            event(new Registered($user));
-
+            // log the new user in
             Auth::login($user);
 
-            return to_route('dashboard');
+            // redirect to their profile
+            return to_route('users.show', $user);
         }
     }
 }

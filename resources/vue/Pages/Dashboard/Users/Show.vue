@@ -247,7 +247,8 @@ const handleFileChange = (event: any) => {
 }
 
 const uploadImage = () => {
-  imageForm.post(route('users.photo'))
+  // @ts-expect-error expected ziggy error
+  imageForm.post(route('users.photo', props.user))
 }
 </script>
 
@@ -263,7 +264,6 @@ const uploadImage = () => {
 }
 
 .img {
-  min-height: 250px;
   max-height: 250px;
   @apply dark:border-stone-600/60
     rounded-t-sm
@@ -284,7 +284,6 @@ const uploadImage = () => {
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 250px;
   max-height: 250px;
   background: var(--el-fill-color-light);
   color: var(--el-text-color-secondary);

@@ -4,8 +4,8 @@ namespace App\Http\Controllers {
 
     use App\Http\Requests;
     use Inertia\Response;
-    use App\Models\User;
     use Illuminate\Http;
+    use App\Models\User;
 
     class UserController extends Controller
     {
@@ -67,7 +67,7 @@ namespace App\Http\Controllers {
         /**
          * Upload a user's profile image.
          */
-        public function uploadPhoto(Requests\UploadProfilePhoto $request): void
+        public function uploadPhoto(Requests\UploadProfilePhoto $request, User $user): void
         {
             // validate the file
             $request->validated();
@@ -79,15 +79,13 @@ namespace App\Http\Controllers {
 
                 // transform the image name to the users UUID
                 $ext = $file->getClientOriginalExtension();
-                $userID = auth()->user()['id'];
-                $newFile = $userID . '.' . $ext;
+                $newFile = $user['id'] . '.' . $ext;
 
                 // store the file
                 $path = $file->storeAs('uploads/users', $newFile, 'public');
 
                 // save the profile image to the database
-                $user = User::find($userID);
-                $user->profile_image = url('/storage') . "/$path";
+                $user['profile_image'] = url('/storage') . "/$path";
                 $user->save();
 
                 // return the success message

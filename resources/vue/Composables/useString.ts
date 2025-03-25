@@ -7,8 +7,7 @@
  * @since   1.0.0
  */
 export function useString() {
-  /**
-   * ----------------------------------------------------
+  /** --------------------------------------------
    * Truncate a string and add an ellipsis to the
    * end of it
    *
@@ -26,8 +25,7 @@ export function useString() {
     return input.length > 5 ? input.substring(0, n) + end : input
   }
 
-  /**
-   * ----------------------------------------------------
+  /** --------------------------------------------
    * Removes hyphens (EG: '-' )  from a string
    *
    * @param phrase {string}
@@ -38,8 +36,7 @@ export function useString() {
     return phrase.replace(/-/g, ' ')
   }
 
-  /**
-   * ----------------------------------------------------
+  /** --------------------------------------------
    * Converts the first letter of each word in
    * a multi-word string to uppercase
    *
@@ -55,8 +52,7 @@ export function useString() {
       .join(' ')
   }
 
-  /**
-   * ----------------------------------------------------
+  /** --------------------------------------------
    * Capitalize the first letter in a string
    *
    * @link https://www.php.net/manual/en/function.ucfirst.php
@@ -69,8 +65,7 @@ export function useString() {
     return string.charAt(0).toUpperCase() + string.slice(1)
   }
 
-  /**
-   * ----------------------------------------------------
+  /** --------------------------------------------
    * Creates a slug formatted string
    *
    * @param str {string}
@@ -85,8 +80,7 @@ export function useString() {
       .replace(/^-+|-+$/g, '')
   }
 
-  /**
-   * ----------------------------------------------------
+  /** --------------------------------------------
    * Removes a trailing comma from a string
    *
    * @param value {string}
@@ -137,8 +131,7 @@ export function useString() {
     'wood',
   ]
 
-  /**
-   * ----------------------------------------------------
+  /** --------------------------------------------
    * Returns the plural of an English word.
    *
    * @export
@@ -193,8 +186,7 @@ export function useString() {
     return word
   }
 
-  /**
-   * ----------------------------------------------------
+  /** --------------------------------------------
    * Returns the singular of an English word.
    *
    * @export
@@ -259,8 +251,7 @@ export function useString() {
     return word
   }
 
-  /**
-   * ----------------------------------------------------
+  /** --------------------------------------------
    * Converts a phone number into a human-readable string
    *
    * @param {string} phone
@@ -277,8 +268,7 @@ export function useString() {
     return null
   }
 
-  /**
-   * ----------------------------------------------------
+  /** --------------------------------------------
    * Get the initials of a name passed through as a string
    *
    * @param {string} name

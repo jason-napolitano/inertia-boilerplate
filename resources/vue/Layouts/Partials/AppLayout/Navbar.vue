@@ -9,6 +9,8 @@
 </template>
 
 <script setup lang="ts">
+// --------------------------------------------------------
+// imports
 import Menu from '@/Layouts/Partials/AppLayout/Navbar/Menu.vue'
 import Logo from '@/Layouts/Partials/AppLayout/Navbar/Logo.vue'
 </script>

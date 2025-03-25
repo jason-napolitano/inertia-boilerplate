@@ -19,6 +19,8 @@
 </template>
 
 <script setup lang="ts">
+// --------------------------------------------------------
+// imports
 import Logout from '@/Components/Buttons/Logout.vue'
 import { useDate } from '@/Composables/useDate'
 import { useAuth } from '@/Composables/useAuth'
@@ -26,11 +28,14 @@ import { usePage } from '@inertiajs/vue3'
 import ListItem from './Item.vue'
 import { computed } from 'vue'
 
-const { can } = useAuth()
+// --------------------------------------------------------
+// composables
 const { currentYear } = useDate()
+const { can } = useAuth()
 const page = usePage()
 
-// app name
+// --------------------------------------------------------
+// computed props
 const appName = computed(() => import.meta.env.VITE_APP_NAME)
 </script>
 

@@ -18,7 +18,7 @@
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
-import { useSidebarStore } from '@/Stores/sidebarStore' // --------------------------------------------------------
+import { useSidebarStore } from '@/Stores/sidebarStore'
 
 // --------------------------------------------------------
 // component props

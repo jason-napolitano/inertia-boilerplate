@@ -60,6 +60,6 @@ const props = withDefaults(defineProps<ComponentProps>(), {
 })
 
 // --------------------------------------------------------
-// component props
+// composables
 const { slotEmpty } = useApp()
 </script>

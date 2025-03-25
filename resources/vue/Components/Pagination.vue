@@ -23,8 +23,15 @@
 </template>
 
 <script setup lang="ts">
-// @ts-nocheck
+// --------------------------------------------------------
+// component props
+interface PaginationLink {
+  active: boolean
+  label: string
+  url: string
+}
+
 const props = defineProps<{
-  links: object[]
+  links: PaginationLink[]
 }>()
 </script>

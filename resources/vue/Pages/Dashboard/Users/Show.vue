@@ -185,7 +185,7 @@
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
-import { Highlighter, BookUser, UserPen, Wallet } from 'lucide-vue-next'
+import { Highlighter, BookUser, UserPen } from 'lucide-vue-next'
 import FlashMessage from '@/Layouts/Partials/FlashMessage.vue'
 import { Picture, Refresh } from '@element-plus/icons-vue'
 import { useDate } from '@/Composables/useDate'
@@ -216,6 +216,8 @@ const form = useForm({
   name: null,
 })
 
+// --------------------------------------------------------
+// form action
 const submitForm = () => {
   // @ts-expect-error Expected Ziggy error
   form.patch(route('users.update', props.user))

@@ -14,8 +14,12 @@
 </template>
 
 <script setup lang="ts">
+// --------------------------------------------------------
+// imports
 import { useDarkMode } from '@/Composables/useDarkMode'
 import { Moon, Sunny } from '@element-plus/icons-vue'
 
+// --------------------------------------------------------
+// composables
 const { isDark, toggleDarkMode } = useDarkMode()
 </script>

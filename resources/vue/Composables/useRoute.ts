@@ -1,5 +1,5 @@
 export function useRoute() {
-  /**
+  /** --------------------------------------------
    * Returns a boolean if the current route matches
    * the route passed through
    *

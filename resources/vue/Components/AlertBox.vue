@@ -52,7 +52,7 @@ const props = withDefaults(defineProps<ComponentProps>(), {
 // --------------------------------------------------------
 // icon type
 const icon = computed(() => {
-  if (props.type === AlertType.INFO) {
+  if (props.type === AlertType.INFO || props.type === AlertType.NEUTRAL) {
     return Info
   }
   if (props.type === AlertType.SUCCESS) {

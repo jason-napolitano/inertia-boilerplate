@@ -14,8 +14,12 @@
   </header>
 </template>
 <script setup lang="ts">
+// --------------------------------------------------------
+// imports
 import { ArrowRight } from '@element-plus/icons-vue'
 
+// --------------------------------------------------------
+// component props
 const props = withDefaults(
   defineProps<{
     breadcrumbText: string | null

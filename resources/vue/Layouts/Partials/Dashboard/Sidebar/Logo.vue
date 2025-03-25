@@ -33,7 +33,7 @@ const sidebar = useSidebarStore()
 const string = useString()
 
 // --------------------------------------------------------
-// computed properties
+// computed props
 const appName = computed(() => {
   const appTitle = import.meta.env.VITE_APP_NAME
   return !sidebar.collapsed ? appTitle : string.initials(appTitle)

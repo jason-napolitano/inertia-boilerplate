@@ -15,14 +15,15 @@ import { PageProps } from '@/Types'
 // shared data
 const { flash } = usePage().props as PageProps
 
-const props = withDefaults(
-  defineProps<{
-    closable: boolean
-    timeout?: number
-  }>(),
-  {
-    timeout: 3500,
-    closable: false,
-  }
-)
+// --------------------------------------------------------
+// component props
+interface ComponentProps {
+  closable: boolean
+  timeout?: number
+}
+
+const props = withDefaults(defineProps<ComponentProps>(), {
+  timeout: 3500,
+  closable: false,
+})
 </script>

@@ -5,6 +5,8 @@
 </template>
 
 <script setup lang="ts">
+// --------------------------------------------------------
+// imports
 import Menu from '@/Layouts/Partials/AppLayout/Footer/Menu.vue'
 </script>
 

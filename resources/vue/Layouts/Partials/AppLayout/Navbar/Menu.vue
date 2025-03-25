@@ -7,10 +7,13 @@
 </template>
 
 <script setup lang="ts">
-import { ChartColumn as TelescopeIcon } from 'lucide-vue-next'
+// --------------------------------------------------------
+// imports
 import { usePage } from '@inertiajs/vue3'
 import ListItem from './Item.vue'
 
+// --------------------------------------------------------
+// composables
 const page = usePage()
 </script>
 

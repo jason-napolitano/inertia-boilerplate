@@ -5,7 +5,7 @@ export function useApp() {
   // composables
   const slots = useSlots()
 
-  /**
+  /** --------------------------------------------
    * Checks to determine if a slot is empty
    *
    * @param {string} slot

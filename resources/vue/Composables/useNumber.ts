@@ -36,7 +36,7 @@ export function useNumber() {
   const percentage = (x: number, y: number, l: number = 2): number =>
     parseFloat(((x / y) * 100).toFixed(l))
 
-  /**
+  /** --------------------------------------------
    * Greater-than wrapper
    *
    * @param x {number}
@@ -46,7 +46,7 @@ export function useNumber() {
    */
   const gt = (x: number, y: number): boolean => x > y
 
-  /**
+  /** --------------------------------------------
    * Less-than wrapper
    *
    * @param x {number}

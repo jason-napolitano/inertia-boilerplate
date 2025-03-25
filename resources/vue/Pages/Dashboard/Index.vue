@@ -1,11 +1,6 @@
 <template>
   <DashboardLayout title="Dashboard Index">
-    <AlertBox
-      type="info"
-      :show-icon="false"
-      :closable="false"
-      :timeout="null"
-    >
+    <AlertBox type="info" :show-icon="false" :closable="false" :timeout="null">
       Welcome to your dashboard! This is some dummy content to show you how it
       this area looks when it has visible content to display. From here, feel
       free to visit the
@@ -23,21 +18,11 @@
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
+import AlertBox from '@/Components/AlertBox.vue'
 import { usePage } from '@inertiajs/vue3'
 import { PageProps } from '@/Types'
-import AlertBox from '@/Components/AlertBox.vue'
-
-// --------------------------------------------------------
-// component props
-interface ComponentProps {
-  // ...
-}
-
-const props = defineProps<ComponentProps>()
 
 // --------------------------------------------------------
 // composables
 const { auth } = usePage().props as PageProps
 </script>
-
-<style scoped></style>

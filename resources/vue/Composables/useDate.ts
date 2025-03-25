@@ -26,7 +26,7 @@ export function useDate() {
   const fromLaravelDate = (value: string, format = null): string =>
     dayjs(value).format(format ?? 'dddd MMM DD, YYYY h:mm A')
 
-  /**
+  /** --------------------------------------------
    * Converts a date into a laravel format
    *
    * @param value
@@ -36,7 +36,7 @@ export function useDate() {
   const toLaravelDate = (value: string): string =>
     dayjs(value).format('YYYY-mm-DD h:mm:ss')
 
-  /**
+  /** --------------------------------------------
    * Returns the current year
    *
    * @returns {string}

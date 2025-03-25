@@ -3,7 +3,8 @@ import { usePage } from '@inertiajs/vue3'
 import { PageProps } from '@/types'
 
 export function useAuth() {
-  // inertia page object
+  // ---------------------------------------------
+  // auth object
   let { auth } = usePage().props as PageProps
 
   /** --------------------------------------------

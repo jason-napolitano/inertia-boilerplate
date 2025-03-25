@@ -45,15 +45,12 @@ namespace App\Http\Controllers {
             return back();
         }
 
-        public function uploadPhoto(Http\Request $request): void
+        public function uploadPhoto(Requests\UploadProfilePhotoRequest $request): void
         {
-//            dd($request['profile_image']);
             // Validate the file
-            $request->validate([
-                'profile_image' => 'required|file|mimes:jpg,png',  // Adjust rules as needed
-            ]);
+            $request->validated();
 
-            // Check if file is uploaded
+            // Check if a file is uploaded
             if ($request->hasFile('profile_image') && $request->file('profile_image')->isValid()) {
                 // Get the file from the request
                 $file = $request->file('profile_image');

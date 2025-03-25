@@ -1,0 +1,31 @@
+@charset "UTF-8";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Raleway-Regular.ttf') format('truetype');
+}
+
+body,
+html,
+#app {
+  font-family: 'Raleway', sans-serif;
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-stone-200 dark:bg-stone-700 rounded-lg;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-stone-300 dark:bg-stone-500 rounded-lg;
+  }
+}

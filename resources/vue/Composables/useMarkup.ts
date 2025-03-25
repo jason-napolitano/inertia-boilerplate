@@ -14,10 +14,8 @@ export function useMarkup() {
    *
    * @returns {string}
    */
-  const activeClass = (
-    route: string,
-    activeClass: string = 'is-active'
-  ): string => (current(route) ? activeClass : '')
+  const activeClass = (route: string, activeClass: string = 'is-active'): string =>
+      (current(route) ? activeClass : '')
 
   return { activeClass }
 }

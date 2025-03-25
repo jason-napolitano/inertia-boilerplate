@@ -39,6 +39,7 @@ namespace App\Http\Controllers {
             $request->validated();
 
             // update the user
+            $user['country'] = $request['country'] ?? $user['country'];
             $user['address'] = $request['address'] ?? $user['address'];
             $user['email'] = $request['email'] ?? $user['email'];
             $user['phone'] = $request['phone'] ?? $user['phone'];

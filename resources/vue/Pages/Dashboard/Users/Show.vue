@@ -19,7 +19,7 @@
             <template #error>
               <div class="image-slot">
                 <el-icon>
-                  <Picture />
+                  <ImageOff />
                 </el-icon>
               </div>
             </template>
@@ -221,7 +221,13 @@
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
-import { BookUser, Highlighter, UserPen, ImageUp } from 'lucide-vue-next'
+import {
+  BookUser,
+  Highlighter,
+  UserPen,
+  ImageUp,
+  ImageOff,
+} from 'lucide-vue-next'
 import FlashMessage from '@/Layouts/Partials/FlashMessage.vue'
 import 'element-plus/es/components/button/style/css'
 import { Refresh } from '@element-plus/icons-vue'
@@ -244,8 +250,8 @@ const date = useDate()
 // --------------------------------------------------------
 // edit form
 const form = useForm({
+  country: props.user['country'],
   profile_image: null,
-  country: null,
   address: null,
   phone: null,
   email: null,

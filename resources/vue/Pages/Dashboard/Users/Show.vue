@@ -221,13 +221,6 @@
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
-import {
-  BookUser,
-  Highlighter,
-  UserPen,
-  ImageUp,
-  ImageOff,
-} from 'lucide-vue-next'
 import FlashMessage from '@/Layouts/Partials/FlashMessage.vue'
 import 'element-plus/es/components/button/style/css'
 import { Refresh } from '@element-plus/icons-vue'
@@ -236,6 +229,13 @@ import { useForm } from '@inertiajs/vue3'
 import { vMaska } from 'maska/vue'
 import { computed } from 'vue'
 import { User } from '@/Types'
+import {
+  BookUser,
+  Highlighter,
+  UserPen,
+  ImageUp,
+  ImageOff,
+} from 'lucide-vue-next'
 
 // --------------------------------------------------------
 // component props

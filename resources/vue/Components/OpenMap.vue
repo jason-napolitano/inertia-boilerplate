@@ -4,6 +4,7 @@
     :loadTilesWhileInteracting="true"
     :loadTilesWhileAnimating="true"
     v-loading="!center.length"
+    class="h-[29rem]"
   >
     <Map.OlView
       :projection="projection"
@@ -57,7 +58,9 @@ onBeforeMount(async () => {
   const provider: OpenStreetMapProvider = new OpenStreetMapProvider()
 
   // generate the results
-  let results = await provider.search({ query: props.address })
+  let results = await provider.search({
+    query: props.address as string,
+  })
 
   // assign the center reference of the map
   center.value = [results[0].x, results[0].y]
@@ -71,7 +74,6 @@ onBeforeMount(async () => {
     justify-center
     bg-stone-100
     w-full
-      h-[29rem]
     items-center
     text-6xl
     rounded

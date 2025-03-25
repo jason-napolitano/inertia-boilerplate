@@ -1,7 +1,7 @@
 <template>
   <ul>
     <ListItem>
-        &copy; {{ currentYear }} {{ appName }} - All Rights Reserved
+      &copy; {{ currentYear }} {{ appName }} - All Rights Reserved
     </ListItem>
     <ListItem v-if="page.props.auth.user && can('view_analytics')">
       <a :href="route('telescope')" target="_blank"> Analytical Data </a>

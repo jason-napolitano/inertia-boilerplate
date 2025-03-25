@@ -21,7 +21,7 @@ namespace App\Http\Controllers {
             return inertia('Dashboard/Users/Show', compact('user'));
         }
 
-        public function update(Requests\UpdateUserRequest $request): Http\RedirectResponse
+        public function update(Requests\UpdateUserProfile $request): Http\RedirectResponse
         {
             $request->validated();
 
@@ -45,7 +45,7 @@ namespace App\Http\Controllers {
             return back();
         }
 
-        public function uploadPhoto(Requests\UploadProfilePhotoRequest $request): void
+        public function uploadPhoto(Requests\UploadProfilePhoto $request): void
         {
             // Validate the file
             $request->validated();

@@ -1,7 +1,7 @@
 import { expect, test, describe } from 'vitest'
 import { useNumber } from '../useNumber'
 
-// composables
+// composable
 const number = useNumber()
 
 describe('number composables', () => {

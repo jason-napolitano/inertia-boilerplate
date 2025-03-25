@@ -33,19 +33,16 @@ namespace App\Http\Controllers {
         /**
          * Update a user record.
          */
-        public function update(Requests\UpdateUserProfile $request): Http\RedirectResponse
+        public function update(Requests\UpdateUserProfile $request, User $user): Http\RedirectResponse
         {
             // validate the request
             $request->validated();
 
-            // locate the user
-            $user = User::find(auth()->user()['id']);
-
             // update the user
-            $user->address = $request['address'] ?? $user['address'];
-            $user->email = $request['email'] ?? $user['email'];
-            $user->phone = $request['phone'] ?? $user['phone'];
-            $user->name = $request['name'] ?? $user['name'];
+            $user['address'] = $request['address'] ?? $user['address'];
+            $user['email'] = $request['email'] ?? $user['email'];
+            $user['phone'] = $request['phone'] ?? $user['phone'];
+            $user['name'] = $request['name'] ?? $user['name'];
             $user->save();
 
             // return the success message

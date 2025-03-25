@@ -264,7 +264,8 @@ const uploadImage = () => {
 }
 
 .img {
-  max-height: 250px;
+  min-height: 200px;
+  max-height: 200px;
   @apply dark:border-stone-600/60
     rounded-t-sm
     border-b-0
@@ -284,7 +285,8 @@ const uploadImage = () => {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-height: 250px;
+  min-height: 200px;
+  max-height: 200px;
   background: var(--el-fill-color-light);
   color: var(--el-text-color-secondary);
   font-size: 3rem;

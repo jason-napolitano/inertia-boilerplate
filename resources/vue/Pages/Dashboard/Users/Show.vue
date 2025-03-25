@@ -199,7 +199,7 @@
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
-import { Highlighter, BookUser, UserPen } from 'lucide-vue-next'
+import { BookUser, Highlighter, UserPen } from 'lucide-vue-next'
 import FlashMessage from '@/Layouts/Partials/FlashMessage.vue'
 import 'element-plus/es/components/button/style/css'
 import { Refresh } from '@element-plus/icons-vue'
@@ -264,8 +264,8 @@ const uploadImage = () => {
 }
 
 .img {
-  min-height: 200px;
-  max-height: 200px;
+  min-height: 175px;
+  max-height: 175px;
   @apply dark:border-stone-600/60
     rounded-t-sm
     border-b-0
@@ -281,19 +281,27 @@ const uploadImage = () => {
 }
 
 .image-slot {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: 200px;
-  max-height: 200px;
   background: var(--el-fill-color-light);
   color: var(--el-text-color-secondary);
+  justify-content: center;
+  align-items: center;
+  min-height: 175px;
+  max-height: 175px;
   font-size: 3rem;
+  display: flex;
+  width: 100%;
 }
 
 .divider {
-  @apply py-2 my-4 border-b border-stone-200 dark:border-stone-500 flex justify-start space-x-2 items-center;
+  @apply border-stone-200
+    dark:border-stone-500
+    justify-start
+    items-center
+    space-x-2
+    border-b
+    py-2
+    my-4
+    flex;
 }
 
 .divider-icon {

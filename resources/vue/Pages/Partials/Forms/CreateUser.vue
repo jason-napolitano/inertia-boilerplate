@@ -78,7 +78,7 @@ const submit = () => {
   form.post(route(props.route), {
     onSuccess: () => {
       form.reset()
-      emit('createUserSuccess', (callback: any) => {
+      emit('createUserSuccess', (callback: () => void) => {
         callback()
       })
     },

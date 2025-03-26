@@ -72,6 +72,8 @@ $ npm run build
 
 ![Dashboard Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/dashboard.png 'Dashboard Page')
 
+![Expanded Sidebar](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/expanded-sidebar.png 'Expanded Sidebar')
+
 ![Users Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/users.png 'User Page')
 
 ![Profile Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/profile.png 'Profile')

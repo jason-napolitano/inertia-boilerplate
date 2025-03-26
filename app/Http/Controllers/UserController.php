@@ -20,7 +20,7 @@ namespace App\Http\Controllers {
             // collect users that are not deleted
             $users = User::withoutTrashed()->paginate(10);
 
-            // map the users roles to $user
+            // map the users' roles to $user
             $users->map(function ($user) {
                 $user['roles'] = $user->getRoleNames();
                 return $user;

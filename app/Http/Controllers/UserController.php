@@ -12,6 +12,8 @@ namespace App\Http\Controllers {
     {
         /**
          * Display the index view.
+         *
+         * @return Response
          */
         public function index(): Response
         {
@@ -29,6 +31,10 @@ namespace App\Http\Controllers {
 
         /**
          * Display the show view.
+         *
+         * @param User $user
+         *
+         * @return Response
          */
         public function show(User $user): Response
         {
@@ -38,6 +44,11 @@ namespace App\Http\Controllers {
 
         /**
          * Update a user record.
+         *
+         * @param Requests\UpdateUserProfile $request
+         * @param User              $user
+         *
+         * @return Http\RedirectResponse
          */
         public function update(Requests\UpdateUserProfile $request, User $user): Http\RedirectResponse
         {
@@ -66,7 +77,7 @@ namespace App\Http\Controllers {
          *
          * @return Http\RedirectResponse
          */
-        public function store(Requests\CreateUserProfile $request)
+        public function store(Requests\CreateUserProfile $request): Http\RedirectResponse
         {
             // validate the request
             $request->validated();
@@ -88,7 +99,11 @@ namespace App\Http\Controllers {
         }
 
         /**
-         * Delete a user record.
+         * Soft-delete a user record.
+         *
+         * @param User $user
+         *
+         * @return Http\RedirectResponse
          */
         public function destroy(User $user): Http\RedirectResponse
         {
@@ -98,6 +113,11 @@ namespace App\Http\Controllers {
 
         /**
          * Upload a user's profile image.
+         *
+         * @param Requests\UploadProfilePhoto $request
+         * @param User               $user
+         *
+         * @return void
          */
         public function uploadPhoto(Requests\UploadProfilePhoto $request, User $user): void
         {
@@ -109,18 +129,18 @@ namespace App\Http\Controllers {
                 // get the file from the request
                 $file = $request->file('profile_image');
 
-                // deleting an old image
-                $oldFile = str_replace(url('/storage'), '', $user->profile_image);
+                // delete the preexisting file
+                $oldFile = str_replace(url('/storage'), '', $user['profile_image']);
                 Support\Facades\Storage::disk('public')->delete($oldFile);
 
-                // transform the image name to the users UUID
+                // transform the image name to the last 12 characters of a UUID
                 $ext = $file->getClientOriginalExtension();
                 $newFile = substr(Support\Str::uuid(), -12) . '.' . $ext;
 
                 // store the file
                 $path = $file->storeAs('uploads/users', $newFile, 'public');
 
-                // save the profile image to the database
+                // save the information to the database
                 $user['profile_image'] = url('/storage') . "/$path";
                 $user->save();
 

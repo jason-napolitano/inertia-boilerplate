@@ -109,9 +109,13 @@ namespace App\Http\Controllers {
                 // get the file from the request
                 $file = $request->file('profile_image');
 
+                // deleting an old image
+                $oldFile = str_replace(url('/storage'), '', $user->profile_image);
+                Support\Facades\Storage::disk('public')->delete($oldFile);
+
                 // transform the image name to the users UUID
                 $ext = $file->getClientOriginalExtension();
-                $newFile = substr($user['id'], -12) . '.' . $ext;
+                $newFile = substr(Support\Str::uuid(), -12) . '.' . $ext;
 
                 // store the file
                 $path = $file->storeAs('uploads/users', $newFile, 'public');

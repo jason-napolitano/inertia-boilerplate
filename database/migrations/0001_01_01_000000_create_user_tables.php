@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('country')->nullable()->default('United States');
-            $table->string('profile_image')->nullable()->default(url('/storage/uploads/users/placeholder.jpg'));
+            $table->string('profile_image')->nullable()->default('');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

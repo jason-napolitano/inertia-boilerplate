@@ -59,9 +59,7 @@ interface CreateUserProps {
   route: string
 }
 
-const props = withDefaults(defineProps<CreateUserProps>(), {
-  route: 'register.store',
-})
+const props = defineProps<CreateUserProps>()
 
 // --------------------------------------------------------
 // registration form

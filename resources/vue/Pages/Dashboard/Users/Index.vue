@@ -5,7 +5,7 @@
         Create User
       </el-button>
     </template>
-    <el-table :data="props.users['data']" border>
+    <el-table :data="props.users['data']" border stripe>
       <el-table-column label="Name" sortable>
         <template #default="scope: TableRow">
           <div class="flex justify-start space-x-2 items-center">

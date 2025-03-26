@@ -1,6 +1,6 @@
 <template>
   <AppLayout title="Register">
-    <CreateUser />
+    <CreateUser route="register.store" />
   </AppLayout>
 </template>
 
@@ -8,24 +8,4 @@
 // --------------------------------------------------------
 // imports
 import CreateUser from '@/Pages/Partials/Forms/CreateUser.vue'
-import { useForm } from '@inertiajs/vue3'
-
-// --------------------------------------------------------
-// registration form
-const form = useForm({
-  password_confirmation: '',
-  password: '',
-  email: '',
-  name: '',
-})
-
-// --------------------------------------------------------
-// registration action
-const submit = () => {
-  form.post(route('register.store'), {
-    onSuccess: () => {
-      form.reset()
-    },
-  })
-}
 </script>

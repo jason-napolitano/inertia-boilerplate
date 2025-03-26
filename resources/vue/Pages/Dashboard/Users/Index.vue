@@ -11,7 +11,7 @@
           <div class="flex justify-start space-x-2 items-center">
             <div class="max-w-3.5 min-w-3.5">
               <el-image
-                class="rounded-full h-3.5 mt-1.5"
+                class="rounded-full max-h-3.5 min-w-3.5 mt-1.5"
                 :src="scope.row['profile_image']"
               >
                 <template #error>

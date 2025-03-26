@@ -36,9 +36,7 @@ export interface PaginatedResults {
   links: PaginationLink[]
 }
 
-export type PageProps<
-  T extends Record<string, unknown> = Record<string, unknown>,
-> = T & {
+export type PageProps<T extends Record<string, unknown> = Record<string, unknown>, > = T & {
   flash: {
     message: string
     type: string

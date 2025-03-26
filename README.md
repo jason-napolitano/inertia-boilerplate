@@ -66,14 +66,14 @@ $ npm run build
 ```
 
 ## Screenshots
-![Login Page]('https://github.com/jason-napolitano/inertia-boilerplate/blob/main/screenshots/login.png')
+![Login Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/login.png 'Login Page')
 
-![Registration Page]('https://github.com/jason-napolitano/inertia-boilerplate/blob/main/screenshots/registration.png')
+![Registration Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/registration.png 'Registration Page')
 
-![Dashboard Page]('https://github.com/jason-napolitano/inertia-boilerplate/blob/main/screenshots/dashboard.png')
+![Dashboard Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/dashboard.png 'Dashboard Page')
 
-![Users Page]('https://github.com/jason-napolitano/inertia-boilerplate/blob/main/screenshots/users.png')
+![Users Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/users.png 'User Page')
 
-![Profile Page]('https://github.com/jason-napolitano/inertia-boilerplate/blob/main/screenshots/profile.png')
+![Profile Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/profile.png 'Profile')
 
-![Profile Image Page]('https://github.com/jason-napolitano/inertia-boilerplate/blob/main/screenshots/profile-image.png')
+![Profile Image Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/profile-image.png 'Profile Image')

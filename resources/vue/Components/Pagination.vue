@@ -24,13 +24,11 @@
 
 <script setup lang="ts">
 // --------------------------------------------------------
-// component props
-interface PaginationLink {
-  active: boolean
-  label: string
-  url: string
-}
+// imports
+import { PaginationLink } from '@/Types'
 
+// --------------------------------------------------------
+// component props
 const props = defineProps<{
   links: PaginationLink[]
 }>()

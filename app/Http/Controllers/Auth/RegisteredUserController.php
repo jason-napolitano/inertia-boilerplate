@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Auth {
 
-    use Illuminate\Validation\ValidationException;
-    use App\Http\Requests\Auth\RegisterRequest;
-    use Illuminate\Auth\Events\Registered;
+    use App\Http\Controllers\Controller;
+    use App\Http\Requests\CreateUserProfile;
+    use App\Models\User;
     use Illuminate\Http\RedirectResponse;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Hash;
-    use App\Http\Controllers\Controller;
-    use Inertia\Response;
+    use Illuminate\Validation\ValidationException;
     use Inertia\Inertia;
-    use App\Models\User;
+    use Inertia\Response;
 
     class RegisteredUserController extends Controller
     {
@@ -29,7 +28,7 @@ namespace App\Http\Controllers\Auth {
          *
          * @throws ValidationException
          */
-        public function store(RegisterRequest $request): RedirectResponse
+        public function store(CreateUserProfile $request): RedirectResponse
         {
             // validate the request
             $request->validated();

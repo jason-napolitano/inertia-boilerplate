@@ -5,27 +5,35 @@ export interface DatabaseRecord {
   id: string
 }
 
+export interface RoleInterface {
+  name: string
+}
+
+export interface PermissionInterface {
+  name: string
+}
+
 export interface User extends DatabaseRecord {
+  permissions: PermissionInterface[]
   email_verified_at?: string
-  state_province: string
   roles: RoleInterface[]
   profile_image: string
-  salary_type: string
   country: string
   address: string
-  salary: number
   phone: string
   email: string
   name: string
 }
 
-export interface PaginatedResults {
-  data: DatabaseRecord[]
-  links: object[]
+export interface PaginationLink {
+  active: boolean
+  label: string
+  url: string
 }
 
-interface RoleInterface {
-  name: string
+export interface PaginatedResults {
+  data: DatabaseRecord[]
+  links: PaginationLink[]
 }
 
 export type PageProps<

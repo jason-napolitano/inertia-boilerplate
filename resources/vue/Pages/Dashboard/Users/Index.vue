@@ -1,6 +1,11 @@
 <template>
   <DashboardLayout title="User Manager">
-    <el-table :data="props.users['data']">
+    <template #heading>
+      <el-button size="small" :icon="Plus" @click="toggleCreateDialog">
+        Create User
+      </el-button>
+    </template>
+    <el-table :data="props.users['data']" border>
       <el-table-column label="Name" sortable>
         <template #default="scope: TableRow">
           <div class="flex justify-start space-x-2 items-center">
@@ -24,10 +29,10 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="Roles" width="100">
+      <el-table-column label="Role" width="100">
         <template #default="scope: TableRow">
           <el-button
-            v-text="scope.row.roles[0]['name']"
+            v-text="ucFirst(scope.row.roles[0]['name'])"
             class="w-full"
             size="small"
           />
@@ -68,20 +73,27 @@
       <pagination :links="props.users['links']" />
     </template>
   </DashboardLayout>
+
+  <ElDialog v-model="createDialogVisible">
+    <CreateUser route="users.store" @createUserSuccess="toggleCreateDialog" />
+  </ElDialog>
 </template>
 
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
+import CreateUser from '@/Pages/Partials/Forms/CreateUser.vue'
 import { Delete, UserFilled } from '@element-plus/icons-vue'
 import { PaginatedResults, User, PageProps } from '@/Types'
 import 'element-plus/es/components/notification/style/css'
 import Pagination from '@/Components/Pagination.vue'
+import { useString } from '@/Composables/useString'
 import { useDate } from '@/Composables/useDate'
 import { ElNotification } from 'element-plus'
+import { Image, Plus } from 'lucide-vue-next'
 import { router } from '@inertiajs/vue3'
 import { usePage } from '@inertiajs/vue3'
-import { Image } from 'lucide-vue-next'
+import { ref } from 'vue'
 
 // --------------------------------------------------------
 // table row interface
@@ -102,6 +114,10 @@ interface ComponentProps {
 const props = defineProps<ComponentProps>()
 
 // --------------------------------------------------------
+// string formatting
+const { ucFirst } = useString()
+
+// --------------------------------------------------------
 // date formatting
 const date = useDate()
 
@@ -118,4 +134,11 @@ const deleteUser = (user: User): void => {
     })
   }
 }
+
+// --------------------------------------------------------
+// user creation
+const createDialogVisible = ref<boolean>(false)
+
+const toggleCreateDialog = () =>
+  (createDialogVisible.value = !createDialogVisible.value)
 </script>

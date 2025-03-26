@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers {
 
+    use Illuminate\Support;
     use App\Http\Requests;
+    use Inertia\Response;
     use App\Models\User;
     use Illuminate\Http;
-    use Inertia\Response;
 
     class UserController extends Controller
     {
@@ -55,6 +56,34 @@ namespace App\Http\Controllers {
             $request->session()->flash('message', 'Settings successfully updated.');
 
             // redirect back
+            return back();
+        }
+
+        /**
+         * Store a newly created resource in storage.
+         *
+         * @param Requests\CreateUserProfile $request
+         *
+         * @return Http\RedirectResponse
+         */
+        public function store(Requests\CreateUserProfile $request)
+        {
+            // validate the request
+            $request->validated();
+
+            // create the user
+            $user = User::create([
+                'name'     => $request['name'],
+                'email'    => $request['email'],
+                'password' => Support\Facades\Hash::make($request['password']),
+            ]);
+
+            // assign the default role (member)
+            $user->assignRole(env('APP_DEFAULT_ROLE'));
+
+            $request->session()->flash('message', 'The user was created successfully.');
+
+            // redirect to their profile
             return back();
         }
 

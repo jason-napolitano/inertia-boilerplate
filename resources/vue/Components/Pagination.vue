@@ -7,14 +7,14 @@
           class="no-underline px-2 py-1 text-sm text-gray-600 border rounded-0 dark:border-stone-700 cursor-not-allowed"
           v-html="link['label']"
         />
-        <Link
+        <div
+          @click="changePage(link)"
           v-else
-          class="no-underline px-2 py-1 text-sm border rounded-0 dark:border-stone-700"
+          class="no-underline cursor-pointer px-2 py-1 text-sm border rounded-0 dark:border-stone-700"
           :class="{
             'bg-[#F5F7FA] dark:bg-[#262727] text-stone-600 dark:text-stone-200':
               link.active,
           }"
-          :href="link['url']"
           v-html="link['label']"
         />
       </template>
@@ -26,10 +26,21 @@
 // --------------------------------------------------------
 // imports
 import { PaginationLink } from '@/Types'
+import { router } from '@inertiajs/vue3'
 
 // --------------------------------------------------------
 // component props
 const props = defineProps<{
   links: PaginationLink[]
 }>()
+
+// --------------------------------------------------------
+// change page
+const changePage = (link: PaginationLink) => {
+  router.visit(link['url'], {
+    preserveState: true,
+    showProgress: false,
+    replace: false,
+  })
+}
 </script>

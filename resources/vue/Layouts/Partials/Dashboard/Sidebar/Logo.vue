@@ -12,7 +12,7 @@
 // imports
 import { useSidebarStore } from '@/Stores/sidebarStore'
 import { useString } from '@/Composables/useString'
-import { computed } from 'vue'
+import { computed, onBeforeMount } from 'vue'
 
 // --------------------------------------------------------
 // component props
@@ -37,6 +37,12 @@ const string = useString()
 const appName = computed(() => {
   const appTitle = import.meta.env.VITE_APP_NAME
   return !sidebar.collapsed ? appTitle : string.initials(appTitle)
+})
+
+onBeforeMount(() => {
+  if (!sidebar.isShown) {
+    sidebar.collapsed = false
+  }
 })
 </script>
 

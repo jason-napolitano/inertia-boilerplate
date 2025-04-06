@@ -39,7 +39,9 @@
     </el-form-item>
 
     <el-form-item>
-      <el-button @click="submit" class="w-full">Register</el-button>
+      <el-button @click="submit" class="w-full">{{
+        props.buttonText
+      }}</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -56,6 +58,7 @@ const emit = defineEmits(['createUserSuccess'])
 // --------------------------------------------------------
 // component props
 interface CreateUserProps {
+  buttonText: string
   route: string
 }
 
@@ -80,6 +83,7 @@ const submit = () => {
         callback()
       })
     },
+    showProgress: false,
   })
 }
 </script>

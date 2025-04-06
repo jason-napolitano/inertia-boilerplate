@@ -3,7 +3,7 @@
   <!-- Main Content Area -->
   <main class="flex h-screen">
     <!-- Sidebar -->
-    <Sidebar />
+    <AppSidebar v-if="sidebar.isShown" />
 
     <!-- Content Section -->
     <section class="flex-1 flex flex-col">
@@ -45,7 +45,8 @@
 import Container from './Partials/Dashboard/Content/Container.vue'
 import Heading from '@/Layouts/Partials/Dashboard/Heading.vue'
 import DashboardNavbar from './Partials/Dashboard/Navbar.vue'
-import Sidebar from './Partials/Dashboard/Sidebar.vue'
+import { useSidebarStore } from '@/Stores/sidebarStore'
+import AppSidebar from './Partials/Dashboard/Sidebar.vue'
 import { useApp } from '@/Composables/useApp'
 import { Head } from '@inertiajs/vue3'
 
@@ -58,6 +59,10 @@ interface ComponentProps {
 const props = withDefaults(defineProps<ComponentProps>(), {
   title: null,
 })
+
+// --------------------------------------------------------
+// sidebar state
+const sidebar = useSidebarStore()
 
 // --------------------------------------------------------
 // composables

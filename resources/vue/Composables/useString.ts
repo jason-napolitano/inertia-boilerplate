@@ -37,6 +37,17 @@ export function useString() {
   }
 
   /** --------------------------------------------
+   * Removes hyphens (EG: '-' )  from a string
+   *
+   * @param phrase {string}
+   *
+   * @returns {string}
+   */
+  function removeUnderscores(phrase: string): string {
+    return phrase.replace(/_/g, ' ')
+  }
+
+  /** --------------------------------------------
    * Converts the first letter of each word in
    * a multi-word string to uppercase
    *
@@ -284,6 +295,7 @@ export function useString() {
 
   return {
     removeTrailingComma,
+    removeUnderscores,
     removeHyphens,
     phoneNumber,
     toTitleCase,

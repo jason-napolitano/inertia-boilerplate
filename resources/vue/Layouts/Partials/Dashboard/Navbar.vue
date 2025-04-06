@@ -1,19 +1,23 @@
 <template>
   <header class="text-stone-400">
     <nav>
-      <Icon />
+      <Icon v-if="sidebar.isShown" />
+      <SidebarLogo v-else :icon="ListTodo" />
     </nav>
-
-    <Menu />
+    <div class="flex justify-end">
+      <Menu />
+    </div>
   </header>
 </template>
 
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
+import SidebarLogo from '@/Layouts/Partials/Dashboard/Sidebar/Logo.vue'
 import { useSidebarStore } from '@/Stores/sidebarStore'
 import Icon from './Navbar/Icon.vue'
 import Menu from './Navbar/Menu.vue'
+import { ListTodo } from 'lucide-vue-next'
 
 // --------------------------------------------------------
 // sidebar state
@@ -35,7 +39,7 @@ header {
 
 nav {
   @apply flex
-  items-center
-  space-x-4;
+    items-center
+    space-x-4;
 }
 </style>

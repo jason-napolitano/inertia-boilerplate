@@ -1,5 +1,13 @@
 <template>
   <DashboardLayout :title="props.user.name">
+    <template #heading v-if="props.user['id'] == auth.user['id']">
+      <Logout>
+        <div class="flex items-center justify-start space-x-1">
+          <span>Account Logout</span>
+          <LogOut class="h-[0.75rem]"></LogOut>
+        </div>
+      </Logout>
+    </template>
     <section class="flex space-x-4">
       <div class="w-1/6">
         <div class="img-container">
@@ -32,6 +40,7 @@
       <div class="w-5/6 flex flex-col space-y-4">
         <FlashMessage :closable="false" />
         <el-tabs type="border-card">
+          <!-- profile information tab -->
           <el-tab-pane>
             <template #label>
               <span class="tab-label">
@@ -173,7 +182,9 @@
               </el-form>
             </section>
           </el-tab-pane>
+          <!-- ./profile information tab -->
 
+          <!-- profile image tab -->
           <el-tab-pane>
             <template #label>
               <span class="tab-label">
@@ -183,35 +194,121 @@
                 <span>Profile Image</span>
               </span>
             </template>
-            <form
-              @submit.prevent="uploadImage"
-              class="flex flex-col space-y-4"
-              enctype="multipart/form-data"
-            >
-              <div
-                class="relative flex flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer"
+            <div class="flex flex-col space-y-2">
+              <div class="flex justify-end">
+                <el-button
+                  :disabled="props.user['profile_image'] == ''"
+                  @click="deleteCurrentProfilePhoto"
+                  :icon="Delete"
+                  type="danger"
+                  size="small"
+                >
+                  Delete Current Image
+                </el-button>
+              </div>
+              <form
+                @submit.prevent="uploadImage"
+                class="flex flex-col space-y-4"
+                enctype="multipart/form-data"
               >
-                <input
-                  class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
-                  @change="handleFileChange"
-                  type="file"
-                  multiple
-                />
+                <div
+                  class="relative flex flex-col hover:text-[#2E8EFF] text-stone-400 border border-stone-200 border-dashed dark:border-stone-700 rounded cursor-pointer"
+                >
+                  <input
+                    class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
+                    @change="handleFileChange"
+                    type="file"
+                    multiple
+                  />
+
+                  <div
+                    class="flex flex-col items-center justify-center py-10 text-center"
+                  >
+                    <p class="m-0">
+                      Drag your files here or click in this area.
+                    </p>
+                    <p class="mt-2 text-xs dark:text-stone-500">
+                      <strong>{{ currentImage }}</strong>
+                    </p>
+                  </div>
+                </div>
 
                 <div
-                  class="flex flex-col items-center justify-center py-10 text-center"
+                  class="flex justify-center items-center space-x-1 mt-4 text-red-500"
+                  v-if="imageForm.errors['profile_image']"
                 >
-                  <p class="m-0">Drag your files here or click in this area.</p>
-                  <p class="mt-2 text-xs">
-                    <strong>{{ currentImage }}</strong>
-                  </p>
+                  <div>
+                    <FileWarning class="h-4" />
+                  </div>
+                  <div>
+                    {{ imageForm.errors['profile_image'] }}
+                  </div>
                 </div>
-              </div>
-              <button type="submit" class="el-button w-full">
-                Upload Image
-              </button>
-            </form>
+                <button type="submit" class="el-button w-full">
+                  Upload Image
+                </button>
+              </form>
+            </div>
           </el-tab-pane>
+          <!-- ./profile image tab -->
+
+          <!-- appearance tab -->
+          <el-tab-pane>
+            <template #label>
+              <span class="tab-label">
+                <el-icon>
+                  <LayoutList />
+                </el-icon>
+                <span>Appearance</span>
+              </span>
+            </template>
+            <AlertBox class="text-sm" :timeout="null" :closable="false">
+              These settings are stored locally in your browser using
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"
+                class="underline"
+                target="_blank"
+                >local storage</a
+              >. They will be reset if you clear your browser's history using
+              third-party cleaning applications, or your browser's built in
+              history management features.
+            </AlertBox>
+            <el-row :gutter="8">
+              <el-col :span="8">
+                <div class="divider">
+                  <span>
+                    <SunMoon class="divider-icon" />
+                  </span>
+                  <span>Dark / Light Mode</span>
+                </div>
+                <div>
+                  <DarkMode>
+                    <template #light>
+                      <el-button class="w-full">Toggle Light Mode</el-button>
+                    </template>
+                    <template #dark>
+                      <el-button class="w-full">Toggle Dark Mode</el-button>
+                    </template>
+                  </DarkMode>
+                </div>
+              </el-col>
+
+              <!--
+              <el-col :span="8">
+                <div class="divider">
+                  <span>
+                    <SunMoon class="divider-icon" />
+                  </span>
+                  <span>Sidebar Visibility</span>
+                </div>
+                <div>
+                    <el-button class="w-full" @click="sidebar.toggleIsShown">Toggle Sidebar</el-button>
+                </div>
+              </el-col>
+                -->
+            </el-row>
+          </el-tab-pane>
+          <!-- ./appearance tab -->
         </el-tabs>
       </div>
     </section>
@@ -221,20 +318,29 @@
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
+import { Delete, InfoFilled, Refresh } from '@element-plus/icons-vue'
 import FlashMessage from '@/Layouts/Partials/FlashMessage.vue'
+import { useForm, router, usePage } from '@inertiajs/vue3'
+import 'element-plus/es/components/message-box/style/css'
+import DarkMode from '@/Components/Buttons/DarkMode.vue'
+import Logout from '@/Components/Buttons/Logout.vue'
 import 'element-plus/es/components/button/style/css'
-import { Refresh } from '@element-plus/icons-vue'
+import AlertBox from '@/Components/AlertBox.vue'
 import { useDate } from '@/Composables/useDate'
-import { useForm } from '@inertiajs/vue3'
+import { ElMessageBox } from 'element-plus'
+import { User, PageProps } from '@/Types'
 import { vMaska } from 'maska/vue'
 import { computed } from 'vue'
-import { User } from '@/Types'
 import {
-  BookUser,
   Highlighter,
+  FileWarning,
+  LayoutList,
+  ImageOff,
+  BookUser,
   UserPen,
   ImageUp,
-  ImageOff,
+  SunMoon,
+  LogOut,
 } from 'lucide-vue-next'
 
 // --------------------------------------------------------
@@ -242,6 +348,10 @@ import {
 const props = defineProps<{
   user: User
 }>()
+
+// --------------------------------------------------------
+// composables
+const { auth } = usePage().props as PageProps
 
 // --------------------------------------------------------
 // composables
@@ -277,7 +387,10 @@ const handleFileChange = (event: any) => {
 
 const uploadImage = () => {
   // @ts-expect-error expected ziggy error
-  imageForm.post(route('users.photo', props.user))
+  imageForm.post(route('users.photo', props.user), {
+    onSuccess: () => imageForm.reset(),
+    showProgress: false,
+  })
 }
 
 const currentImage = computed(() =>
@@ -285,6 +398,21 @@ const currentImage = computed(() =>
     ? imageForm.profile_image['name']
     : 'No image selected'
 )
+
+const deleteCurrentProfilePhoto = () => {
+  ElMessageBox.confirm('This will permanently delete the file. Continue?', {
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancel',
+    type: 'warning',
+  }).then(() => {
+    // @ts-expect-error Expected ziggy error
+    router.delete(route('users.photo.delete', props.user), {
+      preserveScroll: true,
+      preserveState: true,
+      showProgress: false,
+    })
+  })
+}
 </script>
 
 <style scoped>

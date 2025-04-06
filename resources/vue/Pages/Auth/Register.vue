@@ -1,6 +1,6 @@
 <template>
   <AppLayout title="Register">
-    <CreateUser route="register.store" />
+    <CreateUser route="register.store" button-text="Register" />
   </AppLayout>
 </template>
 

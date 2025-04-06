@@ -14,11 +14,12 @@
     "php": "^8.2",
     "dipeshsukhia/laravel-html-minify": "^v3.3.5",
     "inertiajs/inertia-laravel": "^v2.0.1",
-    "laravel/framework": "^v12.3.0",
+    "laravel/framework": "^v12.7.2",
     "laravel/sanctum": "^v4.0.8",
     "laravel/telescope": "^5.6",
     "laravel/tinker": "^v2.10.1",
     "spatie/laravel-permission": "6.16.0",
+    "spatie/laravel-query-builder": "^6.3",
     "staudenmeir/belongs-to-through": "^v2.16.4",
     "tightenco/ziggy": "^v2.5.2"
   },

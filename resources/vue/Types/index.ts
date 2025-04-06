@@ -46,3 +46,10 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
     user: User
   }
 }
+
+export type SidebarItem = {
+    title?: string | null
+    route?: string | null
+    icon?: object | null
+    children?: SidebarItem[] | null
+}

@@ -1,11 +1,31 @@
 <template>
-  <aside :class="{ 'w-60': !sidebar.collapsed, 'w-20': sidebar.collapsed }">
-    <SidebarLogo :icon="LayoutDashboard" />
-
-    <SidebarMenu>
-      <SidebarItem to="dashboard" :icon="Gauge" text="Dashboard Index" />
-      <SidebarItem to="users.index" :icon="Users" text="User Manager" />
-    </SidebarMenu>
+  <aside :class="{ 'w-60': !sidebar.collapsed, 'w-16.5': sidebar.collapsed }">
+    <div class="flex items-center justify-center py-4">
+      <SidebarLogo :icon="ListTodo" />
+    </div>
+    <el-menu :collapse="sidebar.collapsed" :unique-opened="true">
+      <el-sub-menu
+        v-for="(sidebarItem, mainIndex) in sidebarItems"
+        :index="mainIndex"
+      >
+        <template #title>
+          <el-icon>
+            <SidebarIcon :icon="sidebarItem.icon"></SidebarIcon>
+          </el-icon>
+          <span>
+            {{ sidebarItem.title }}
+          </span>
+        </template>
+        <el-menu-item
+          v-for="(child, childIndex) in sidebarItem.children"
+          :index="mainIndex + '-' + childIndex"
+        >
+          <Link :href="route(child.route as string)" class="flex w-full">
+            {{ child.title }}
+          </Link>
+        </el-menu-item>
+      </el-sub-menu>
+    </el-menu>
   </aside>
 </template>
 
@@ -13,17 +33,31 @@
 // --------------------------------------------------------
 // imports
 import { useSidebarStore } from '@/Stores/sidebarStore'
-import { LayoutDashboard, Gauge, Users } from 'lucide-vue-next'
-import SidebarMenu from './Sidebar/Menu.vue'
+import { useSidebar } from '@/Composables/useSidebar'
+import SidebarIcon from './Sidebar/Icon.vue'
 import SidebarLogo from './Sidebar/Logo.vue'
-import SidebarItem from './Sidebar/Item.vue'
+import { ListTodo } from 'lucide-vue-next'
 
 // --------------------------------------------------------
 // sidebar state
 const sidebar = useSidebarStore()
+
+
+// --------------------------------------------------------
+// sidebar items
+const { sidebarItems } = useSidebar()
 </script>
 
 <style scoped>
+.el-menu--vertical,
+.el-menu {
+  @apply border-r-0 border-t
+    dark:border-stone-900
+    dark:bg-[#171717]
+    bg-[#F5F7FA]
+    h-screen;
+}
+
 aside {
   @apply dark:border-stone-900
     dark:text-stone-200
@@ -31,13 +65,10 @@ aside {
     dark:bg-[#0c0c0c]
     text-stone-700
     bg-[#F5F7FA]
-    transition-all
     justify-start
-    duration-300
-    space-y-6
+    transition
     flex-col
     border-r
-    flex
-    p-4;
+    flex;
 }
 </style>

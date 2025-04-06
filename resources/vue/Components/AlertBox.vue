@@ -18,8 +18,8 @@
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
-import { ref, computed, onMounted } from 'vue'
 import { CircleCheck, CircleAlert, CircleX, Info, X } from 'lucide-vue-next'
+import { ref, computed, onMounted } from 'vue'
 
 // --------------------------------------------------------
 // alert types
@@ -104,7 +104,7 @@ onMounted(() => {
 }
 
 .info {
-  @apply dark:bg-sky-600 bg-sky-600/80;
+  @apply dark:bg-sky-800 bg-sky-600/80;
 }
 
 .fade-enter-active,

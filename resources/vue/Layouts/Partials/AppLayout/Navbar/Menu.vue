@@ -1,7 +1,5 @@
 <template>
   <ul>
-    <ListItem to="home" text="Home" />
-    <ListItem to="about" text="About" />
     <ListItem v-if="page.props.auth.user" to="dashboard" text="Dashboard" />
   </ul>
 </template>

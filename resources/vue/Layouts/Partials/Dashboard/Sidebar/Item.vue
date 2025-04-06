@@ -51,13 +51,14 @@ li a {
     inline-flex
     text-center
     ease-in-out
+    rounded-sm
     transition
     bg-white
     space-x-1
-    rounded
     w-full
     border
-    p-2;
+    px-2
+    py-1;
 }
 
 li a span {

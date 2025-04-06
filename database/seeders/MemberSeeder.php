@@ -13,13 +13,9 @@ class MemberSeeder extends Seeder
      */
     public function run(): void
     {
-        // administrator
+        // occupant
         $member = Role::create(['name' => env('APP_DEFAULT_ROLE')]);
-        $member->givePermissionTo('view_dashboard_message');
-        $member->givePermissionTo('update_password');
         $member->givePermissionTo('manage_profile');
-        $member->givePermissionTo('update_email');
-        $member->givePermissionTo('update_image');
-        $member->givePermissionTo('update_name');
+        $member->givePermissionTo('update_profile');
     }
 }

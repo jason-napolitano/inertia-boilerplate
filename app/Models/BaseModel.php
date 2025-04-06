@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Models;
+namespace App\Models {
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Concerns\HasUuids;
+    use Illuminate\Database\Eloquent\SoftDeletes;
+    use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Support\Collection;
 
-/**
- * @method static create(array|Collection $data)
- */
-class BaseModel extends Model
-{
-    // traits
-    use SoftDeletes;
-    use HasFactory;
-    use HasUuids;
+    /**
+     * @method static inRandomOrder()
+     * @method static create(array|Collection $data)
+     * @method static find(string|number $id)
+     */
+    class BaseModel extends Model
+    {
+        // traits
+        use SoftDeletes;
+        use HasFactory;
+        use HasUuids;
+    }
 }

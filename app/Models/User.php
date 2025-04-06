@@ -2,11 +2,11 @@
 
 namespace App\Models {
 
-    use Illuminate\Database\Eloquent\Relations\BelongsToMany;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Concerns\HasUuids;
     use Illuminate\Database\Eloquent\SoftDeletes;
+    use Illuminate\Database\Eloquent\Relations;
     use Illuminate\Notifications\Notifiable;
     use Spatie\Permission\Traits\HasRoles;
     use Illuminate\Support\Collection;
@@ -26,13 +26,10 @@ namespace App\Models {
 
         /** @inheritdoc */
         protected $fillable = [
-            'state_province',
             'profile_image',
-            'salary_type',
             'password',
             'address',
             'country',
-            'salary',
             'phone',
             'email',
             'name',

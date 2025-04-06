@@ -14,15 +14,8 @@ namespace Database\Seeders {
         {
             // --------------------------------------------
             // settings
-            Permission::create(['name' => 'manage_settings:change_app_version']);
-            Permission::create(['name' => 'manage_settings:change_app_title']);
+
             Permission::create(['name' => 'manage_settings']);
-
-            // --------------------------------------------
-            // dashboard
-            Permission::create(['name' => 'view_dashboard_message']);
-
-            // --------------------------------------------
             // users
             Permission::create(['name' => 'manage_users']);
             Permission::create(['name' => 'manage_user']);
@@ -49,19 +42,8 @@ namespace Database\Seeders {
             // --------------------------------------------
             // profile
             Permission::create(['name' => 'manage_profile']);
+            Permission::create(['name' => 'update_profile']);
             Permission::create(['name' => 'delete_profile']);
-            Permission::create(['name' => 'update_password']);
-            Permission::create(['name' => 'update_email']);
-            Permission::create(['name' => 'update_image']);
-            Permission::create(['name' => 'update_name']);
-
-            // --------------------------------------------
-            // ui
-            Permission::create(['name' => 'toggle_dark_mode']);
-
-            // --------------------------------------------
-            // dev
-            Permission::create(['name' => 'dev_access']);
 
             // admin wildcard
             Permission::create(['name' => '*']);

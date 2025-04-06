@@ -8,8 +8,10 @@
     </ListItem>
     <ListItem v-if="!page.props.auth.user">
       <div class="flex justify-center space-x-2">
-        <Link :href="route('login.index')"> Login</Link>
+        <Link :href="route('login.index')">Member Login</Link>
+        <!--
         <Link :href="route('register.index')">Register</Link>
+        -->
       </div>
     </ListItem>
     <ListItem v-else>

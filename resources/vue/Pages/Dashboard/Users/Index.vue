@@ -5,6 +5,26 @@
         Create User
       </el-button>
     </template>
+    <template #top>
+      <div class="flex justify-end">
+        <div class="">
+          <el-input
+            placeholder="Search by name or email..."
+            @change="searchUser"
+            v-model="search"
+            size="small"
+          >
+            <template #suffix>
+              <ElTooltip content="Reset Search" placement="left">
+                <ElIcon @click="resetSearch" class="cursor-pointer">
+                  <Refresh />
+                </ElIcon>
+              </ElTooltip>
+            </template>
+          </el-input>
+        </div>
+      </div>
+    </template>
     <el-table :data="props.users['data']" border stripe>
       <el-table-column label="Name" sortable>
         <template #default="scope: TableRow">
@@ -23,18 +43,16 @@
                 </template>
               </el-image>
             </div>
-            <div class="text-lg">
+            <div class="lg">
               {{ scope.row['name'] }}
             </div>
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="Role" width="100">
+      <el-table-column label="Role" width="150">
         <template #default="scope: TableRow">
-          <el-button
-            v-text="ucFirst(scope.row.roles[0]['name'])"
-            class="w-full"
-            size="small"
+          <span
+            v-text="toTitleCase(removeUnderscores(scope.row.roles[0]['name']))"
           />
         </template>
       </el-table-column>
@@ -74,23 +92,43 @@
     </template>
   </DashboardLayout>
 
-  <ElDialog v-model="createDialogVisible">
-    <CreateUser route="users.store" @createUserSuccess="toggleCreateDialog" />
+  <ElDialog v-model="createDialogVisible" :show-close="false">
+    <template #header="{ close, titleId, titleClass }">
+      <div class="my-header">
+        <div class="flex justify-between" :class="titleClass" :id="titleId">
+          <div class="flex justify-start space-x-2 items-center">
+            <div>
+              <UserRoundPlus class="w-4" />
+            </div>
+            <div>Create New User</div>
+          </div>
+          <div class="cursor-pointer">
+            <X @click="close" class="w-4" />
+          </div>
+        </div>
+      </div>
+    </template>
+    <CreateUser
+      route="users.store"
+      @createUserSuccess="toggleCreateDialog"
+      button-text="Create User"
+    />
   </ElDialog>
 </template>
 
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
+import { Delete, Refresh, UserFilled } from '@element-plus/icons-vue'
+import { Image, Plus, UserRoundPlus, X } from 'lucide-vue-next'
 import CreateUser from '@/Pages/Partials/Forms/CreateUser.vue'
-import { Delete, UserFilled } from '@element-plus/icons-vue'
 import { PaginatedResults, User, PageProps } from '@/Types'
+import { ElNotification, ElMessageBox } from 'element-plus'
 import 'element-plus/es/components/notification/style/css'
+import 'element-plus/es/components/message-box/style/css'
 import Pagination from '@/Components/Pagination.vue'
 import { useString } from '@/Composables/useString'
 import { useDate } from '@/Composables/useDate'
-import { ElNotification } from 'element-plus'
-import { Image, Plus } from 'lucide-vue-next'
 import { router } from '@inertiajs/vue3'
 import { usePage } from '@inertiajs/vue3'
 import { ref } from 'vue'
@@ -115,7 +153,7 @@ const props = defineProps<ComponentProps>()
 
 // --------------------------------------------------------
 // string formatting
-const { ucFirst } = useString()
+const { toTitleCase, removeUnderscores } = useString()
 
 // --------------------------------------------------------
 // date formatting
@@ -124,15 +162,21 @@ const date = useDate()
 // --------------------------------------------------------
 // user deletion
 const deleteUser = (user: User): void => {
-  if (user.id !== auth.user.id) {
-    // @ts-expect-error Expected ziggy error
-    router.delete(route('users.destroy', user))
-  } else {
-    ElNotification({
-      message: 'This user cannot be deleted.',
-      type: 'error',
-    })
-  }
+  ElMessageBox.confirm('This will permanently delete the user. Continue?', {
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancel',
+    type: 'warning',
+  }).then(() => {
+    if (user.id !== auth.user.id) {
+      // @ts-expect-error Expected ziggy error
+      router.delete(route('users.destroy', user))
+    } else {
+      ElNotification({
+        message: 'This user cannot be deleted.',
+        type: 'error',
+      })
+    }
+  })
 }
 
 // --------------------------------------------------------
@@ -141,4 +185,23 @@ const createDialogVisible = ref<boolean>(false)
 
 const toggleCreateDialog = () =>
   (createDialogVisible.value = !createDialogVisible.value)
+
+// --------------------------------------------------------
+// query filtration
+const search = ref(null)
+
+const resetSearch = () => {
+  search.value = null
+  searchUser(search.value)
+}
+
+const searchUser = (value: string | null): void => {
+  router.visit(route('users.index'), {
+    data: {
+      'filter[users]': value,
+    },
+    showProgress: false,
+    preserveState: true,
+  })
+}
 </script>

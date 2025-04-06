@@ -8,6 +8,8 @@ namespace App\Http\Requests {
     {
         /**
          * Determine if the user is authorized to make this request.
+         *
+         * @return bool
          */
         public function authorize(): bool
         {
@@ -17,12 +19,22 @@ namespace App\Http\Requests {
         /**
          * Get the validation rules that apply to the request.
          *
-         * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+         * @return array<string>
          */
         public function rules(): array
         {
             return [
-                'profile_image' => 'required|file|mimes:jpg,png',  // Adjust rules as needed
+                'profile_image' => 'required|file|mimes:jpg,png,webp',
+            ];
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function messages(): array
+        {
+            return [
+                'profile_image.required' => 'Please select an image from your hard drive in order to complete this request',
             ];
         }
     }

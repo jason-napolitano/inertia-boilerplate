@@ -64,18 +64,3 @@ $ php artisan optimize:clear
 # run the build process
 $ npm run build
 ```
-
-## Screenshots
-![Login Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/login.png 'Login Page')
-
-![Registration Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/registration.png 'Registration Page')
-
-![Dashboard Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/dashboard.png 'Dashboard Page')
-
-![Expanded Sidebar](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/expanded-sidebar.png 'Expanded Sidebar')
-
-![Users Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/users.png 'User Page')
-
-![Profile Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/profile.png 'Profile')
-
-![Profile Image Page](https://raw.githubusercontent.com/jason-napolitano/inertia-boilerplate/refs/heads/main/screenshots/profile-image.png 'Profile Image')

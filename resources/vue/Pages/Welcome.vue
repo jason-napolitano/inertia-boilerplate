@@ -1,6 +1,6 @@
 <template>
   <AppLayout title="Homepage">
-    <h1 class="text-xl text-center">Welcome to {{ appName }}</h1>
+    <h1 class="text-xl text-center">Welcome to your {{ appName }}</h1>
     <hr />
     <p class="text-justify">
       {{ appName }} is a streamlined tool designed to simplify the

@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'Exo2';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Exo2-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Raleway-Regular.ttf') format('truetype');
+}
+
+.font-raleway {
+  font-family: 'Raleway', sans-serif;
+}
+
+.font-exo-2 {
+  font-family: 'Exo2', sans-serif;
+}

@@ -16,6 +16,12 @@
       <ElIcon class="w-2">
         <CircleUserRound />
       </ElIcon>
+      <a :href="route('telescope')" v-text="'Analytics'" target="_blank" />
+    </li>
+    <li>
+      <ElIcon class="w-2">
+        <CircleUserRound />
+      </ElIcon>
       <Link :href="route('users.show', auth.user)" v-text="'My Profile'" />
     </li>
   </ul>
@@ -48,6 +54,6 @@ li {
 }
 
 .is-active {
-    @apply text-blue-400 underline
+  @apply text-blue-400 underline;
 }
 </style>

@@ -12,8 +12,8 @@
 - Laravel Packages
     - [`staudenmeir/belongs-to-through`](https://packagist.org/packages/staudenmeir/belongs-to-through)
     - [`spatie/laravel-query-builder`](https://packagist.org/packages/spatie/laravel-query-builder)
+    - [`spatie/laravel-permission`](https://packagist.org/packages/spatie/laravel-permission)
     - [`barryvdh/laravel-debugbar`](https://packagist.org/packages/barryvdh/laravel-debugbar)
-    - [`laravel-permission`](https://packagist.org/packages/spatie/laravel-permission)
     - [`laravel/telescope`](https://packagist.org/packages/laravel/telescope)
     - [`pest`](https://packagist.org/packages/pestphp/pest)
 - Frontend Packages

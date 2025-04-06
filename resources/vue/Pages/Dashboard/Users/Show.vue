@@ -251,64 +251,6 @@
             </div>
           </el-tab-pane>
           <!-- ./profile image tab -->
-
-          <!-- appearance tab -->
-          <el-tab-pane>
-            <template #label>
-              <span class="tab-label">
-                <el-icon>
-                  <LayoutList />
-                </el-icon>
-                <span>Appearance</span>
-              </span>
-            </template>
-            <AlertBox class="text-sm" :timeout="null" :closable="false">
-              These settings are stored locally in your browser using
-              <a
-                href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"
-                class="underline"
-                target="_blank"
-                >local storage</a
-              >. They will be reset if you clear your browser's history using
-              third-party cleaning applications, or your browser's built in
-              history management features.
-            </AlertBox>
-            <el-row :gutter="8">
-              <el-col :span="8">
-                <div class="divider">
-                  <span>
-                    <SunMoon class="divider-icon" />
-                  </span>
-                  <span>Dark / Light Mode</span>
-                </div>
-                <div>
-                  <DarkMode>
-                    <template #light>
-                      <el-button class="w-full">Toggle Light Mode</el-button>
-                    </template>
-                    <template #dark>
-                      <el-button class="w-full">Toggle Dark Mode</el-button>
-                    </template>
-                  </DarkMode>
-                </div>
-              </el-col>
-
-              <!--
-              <el-col :span="8">
-                <div class="divider">
-                  <span>
-                    <SunMoon class="divider-icon" />
-                  </span>
-                  <span>Sidebar Visibility</span>
-                </div>
-                <div>
-                    <el-button class="w-full" @click="sidebar.toggleIsShown">Toggle Sidebar</el-button>
-                </div>
-              </el-col>
-                -->
-            </el-row>
-          </el-tab-pane>
-          <!-- ./appearance tab -->
         </el-tabs>
       </div>
     </section>
@@ -322,10 +264,8 @@ import { Delete, InfoFilled, Refresh } from '@element-plus/icons-vue'
 import FlashMessage from '@/Layouts/Partials/FlashMessage.vue'
 import { useForm, router, usePage } from '@inertiajs/vue3'
 import 'element-plus/es/components/message-box/style/css'
-import DarkMode from '@/Components/Buttons/DarkMode.vue'
 import Logout from '@/Components/Buttons/Logout.vue'
 import 'element-plus/es/components/button/style/css'
-import AlertBox from '@/Components/AlertBox.vue'
 import { useDate } from '@/Composables/useDate'
 import { ElMessageBox } from 'element-plus'
 import { User, PageProps } from '@/Types'

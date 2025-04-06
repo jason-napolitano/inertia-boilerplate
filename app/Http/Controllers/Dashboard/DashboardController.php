@@ -27,9 +27,7 @@ namespace App\Http\Controllers\Dashboard {
             ];
 
             // render the inertia view
-            return inertia('Dashboard/Index', [
-                'server' => $server,
-            ]);
+            return inertia('Dashboard/Index', compact('server'));
         }
     }
 }

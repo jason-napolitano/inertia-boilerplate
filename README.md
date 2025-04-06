@@ -11,6 +11,7 @@
 ### Below lists the included packages and features:
 - Laravel Packages
     - [`staudenmeir/belongs-to-through`](https://packagist.org/packages/staudenmeir/belongs-to-through)
+    - [`barryvdh/laravel-query-builder`](https://packagist.org/packages/spatie/laravel-query-builder)
     - [`barryvdh/laravel-debugbar`](https://packagist.org/packages/barryvdh/laravel-debugbar)
     - [`laravel-permission`](https://packagist.org/packages/spatie/laravel-permission)
     - [`laravel/telescope`](https://packagist.org/packages/laravel/telescope)

@@ -1,7 +1,12 @@
 <template>
   <DashboardLayout title="User Manager">
     <template #heading>
-      <el-button size="small" :icon="Plus" @click="toggleCreateDialog">
+      <el-button
+        size="small"
+        :icon="Plus"
+        @click="toggleCreateDialog"
+        v-if="can('create_user')"
+      >
         Create User
       </el-button>
     </template>
@@ -78,7 +83,7 @@
                 <UserFilled />
               </el-icon>
             </Link>
-            <el-button type="danger" @click="deleteUser(scope.row)">
+            <el-button @click="deleteUser(scope.row)" type="danger">
               <el-icon>
                 <Delete />
               </el-icon>
@@ -129,6 +134,7 @@ import 'element-plus/es/components/message-box/style/css'
 import Pagination from '@/Components/Pagination.vue'
 import { useString } from '@/Composables/useString'
 import { useDate } from '@/Composables/useDate'
+import { useAuth } from '@/Composables/useAuth'
 import { router } from '@inertiajs/vue3'
 import { usePage } from '@inertiajs/vue3'
 import { ref } from 'vue'
@@ -152,6 +158,10 @@ interface ComponentProps {
 const props = defineProps<ComponentProps>()
 
 // --------------------------------------------------------
+// auth check
+const { can } = useAuth()
+
+// --------------------------------------------------------
 // string formatting
 const { toTitleCase, removeUnderscores } = useString()
 
@@ -167,12 +177,12 @@ const deleteUser = (user: User): void => {
     cancelButtonText: 'Cancel',
     type: 'warning',
   }).then(() => {
-    if (user.id !== auth.user.id) {
+    if (user.id !== auth.user.id && user.roles[0]['name'] !== 'admin') {
       // @ts-expect-error Expected ziggy error
       router.delete(route('users.destroy', user))
     } else {
       ElNotification({
-        message: 'This user cannot be deleted.',
+        message: 'This action cannot be completed',
         type: 'error',
       })
     }

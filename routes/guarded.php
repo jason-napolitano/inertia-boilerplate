@@ -17,5 +17,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::delete('users/photo/{user}', [Controllers\Dashboard\UserController::class, 'deletePhoto'])
             ->name('users.photo.delete');
+
+        Route::patch('users/role/{user}', [Controllers\Dashboard\UserController::class, 'updateRole'])->name('users.updateRole');
     });
 });

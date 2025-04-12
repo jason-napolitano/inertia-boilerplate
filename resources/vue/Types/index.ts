@@ -16,8 +16,8 @@ export interface PermissionInterface {
 export interface User extends DatabaseRecord {
   permissions: PermissionInterface[]
   email_verified_at?: string
-  roles: RoleInterface[]
   profile_image: string
+  roles: RoleInterface[]
   country: string
   address: string
   phone: string
@@ -36,7 +36,9 @@ export interface PaginatedResults {
   links: PaginationLink[]
 }
 
-export type PageProps<T extends Record<string, unknown> = Record<string, unknown>, > = T & {
+export type PageProps<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> = T & {
   flash: {
     message: string
     type: string
@@ -48,8 +50,12 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
 }
 
 export type SidebarItem = {
-    title?: string | null
-    route?: string | null
-    icon?: object | null
-    children?: SidebarItem[] | null
+  title?: string | null
+  route?: string | null
+  icon?: object | null
+  children?: SidebarItem[] | null
+}
+
+export interface UserRole {
+  name: string
 }

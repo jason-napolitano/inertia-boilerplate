@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard {
 
     use Illuminate\Database\Eloquent\Builder;
+    use Illuminate\Http\Request;
+    use Spatie\Permission\Models\Role;
     use Spatie\QueryBuilder\AllowedInclude;
     use Spatie\QueryBuilder\AllowedFilter;
     use Spatie\QueryBuilder\QueryBuilder;
@@ -50,8 +52,17 @@ namespace App\Http\Controllers\Dashboard {
          */
         public function show(User $user): Response
         {
+            // user roles
+            $roles = Role::all('name as value', 'name as label');
+            $user['role'] = $user->getRoleNames()[0];
+
+            // dd($user['role']);
+
             // render the inertia view
-            return inertia('Dashboard/Users/Show', compact('user'));
+            return inertia('Dashboard/Users/Show', [
+                'user' => $user,
+                'roles' => $roles
+            ]);
         }
 
         /**
@@ -157,10 +168,10 @@ namespace App\Http\Controllers\Dashboard {
                 $user->save();
 
                 // return the success message
-                $request->session()->flash('message', 'File uploaded successfully');
+                $request->session()->flash('message', 'The image or this user has been successfully uploaded.');
             }
             // return an error message
-            $request->session()->flash('message', 'Something went wrong');
+            $request->session()->flash('message', 'Something went wrong while trying to upload the image.');
         }
 
         /**
@@ -181,9 +192,25 @@ namespace App\Http\Controllers\Dashboard {
             $user->save();
 
             // return the success message
-            $request->session()->flash('message', 'File deleted successfully');
+            $request->session()->flash('message', 'The image or this user has been successfully updated.');
 
             return back();
+        }
+
+        /**
+         * Update the users' current role
+         *
+         * @param User    $user
+         * @param Request $request
+         *
+         * @return void
+         */
+        public function updateRole(User $user, Http\Request $request): void
+        {
+            $user->syncRoles([$request['role']]);
+
+            // return the success message
+            $request->session()->flash('message', 'The role or this user has been successfully updated.');
         }
     }
 }

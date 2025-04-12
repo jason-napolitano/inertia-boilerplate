@@ -38,7 +38,7 @@ namespace App\Http\Controllers\Auth {
             $request->session()->flash('message', 'You have been logged in to your account.');
 
             // redirect to the dashboard
-            return to_route('dashboard');
+            return to_route('users.show', auth()->user());
         }
 
         /**

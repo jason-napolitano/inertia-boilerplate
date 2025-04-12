@@ -9,7 +9,7 @@
       </Logout>
     </template>
     <section class="flex space-x-4">
-      <div class="w-1/6">
+      <div class="flex flex-col space-y-4 w-1/6">
         <div class="img-container">
           <el-image
             :src="props.user['profile_image']"
@@ -33,8 +33,29 @@
             </template>
           </el-image>
           <div class="img-footer">
-            Joined: {{ date.timeAgo(props.user['created_at']) }}
+            <small>
+              <strong>Joined:</strong> {{ date.timeAgo(props.user['created_at']) }}
+            </small>
+            <small>
+              <strong>Role:</strong> {{ string.ucFirst(currentRole) }}
+            </small>
           </div>
+          <el-form v-if="can('update_role')" class="mt-2">
+            <el-form-item>
+              <el-select
+                size="small"
+                placeholder="Select Role"
+                @change="submitRoleChange"
+              >
+                <el-option
+                  :label="string.ucFirst(role.label)"
+                  v-for="role in props.roles"
+                  v-model="currentRole"
+                  :value="role.value"
+                />
+              </el-select>
+            </el-form-item>
+          </el-form>
         </div>
       </div>
       <div class="w-5/6 flex flex-col space-y-4">
@@ -260,32 +281,40 @@
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
-import { Delete, InfoFilled, Refresh } from '@element-plus/icons-vue'
+import { Delete, Refresh } from '@element-plus/icons-vue'
 import FlashMessage from '@/Layouts/Partials/FlashMessage.vue'
-import { useForm, router, usePage } from '@inertiajs/vue3'
+import { router, useForm, usePage } from '@inertiajs/vue3'
 import 'element-plus/es/components/message-box/style/css'
 import Logout from '@/Components/Buttons/Logout.vue'
 import 'element-plus/es/components/button/style/css'
+import { useString } from '@/Composables/useString'
+import { useAuth } from '@/Composables/useAuth'
 import { useDate } from '@/Composables/useDate'
 import { ElMessageBox } from 'element-plus'
-import { User, PageProps } from '@/Types'
+import { PageProps, User } from '@/Types'
+import { computed, ref } from 'vue'
 import { vMaska } from 'maska/vue'
-import { computed } from 'vue'
 import {
-  Highlighter,
-  FileWarning,
-  LayoutList,
-  ImageOff,
   BookUser,
-  UserPen,
+  FileWarning,
+  Highlighter,
+  ImageOff,
   ImageUp,
-  SunMoon,
   LogOut,
+  UserPen,
 } from 'lucide-vue-next'
+
+// --------------------------------------------------------
+// component interfaces / types
+interface UserRole {
+  label: string
+  value: string
+}
 
 // --------------------------------------------------------
 // component props
 const props = defineProps<{
+  roles: UserRole[]
   user: User
 }>()
 
@@ -295,6 +324,8 @@ const { auth } = usePage().props as PageProps
 
 // --------------------------------------------------------
 // composables
+const { can } = useAuth()
+const string = useString()
 const date = useDate()
 
 // --------------------------------------------------------
@@ -353,17 +384,38 @@ const deleteCurrentProfilePhoto = () => {
     })
   })
 }
+
+// --------------------------------------------------------
+// authorization
+const currentRole = ref<string>(props.user['role'])
+
+const submitRoleChange = (e) => {
+  router.visit(route('users.updateRole', props.user), {
+    method: 'PATCH',
+    data: {
+      role: e,
+    },
+    onSuccess: () => (currentRole.value = e),
+    showProgress: false,
+    preserveState: true,
+    preserveScroll: true,
+  })
+}
 </script>
 
 <style scoped>
 .img-footer {
   @apply rounded-b-sm
     dark:border-stone-600/60
-    text-center text-sm
     dark:bg-[#1D1E1F]
     text-neutral-400
     bg-white p-2
-    border;
+    text-center
+    space-y-1
+    flex-col
+    text-sm
+    border
+    flex;
 }
 
 .img {

@@ -42,7 +42,6 @@ import { ListTodo } from 'lucide-vue-next'
 // sidebar state
 const sidebar = useSidebarStore()
 
-
 // --------------------------------------------------------
 // sidebar items
 const { sidebarItems } = useSidebar()

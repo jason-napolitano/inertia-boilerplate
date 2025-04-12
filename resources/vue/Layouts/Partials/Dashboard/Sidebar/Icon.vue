@@ -6,7 +6,7 @@
 // --------------------------------------------------------
 // component props
 interface ComponentProps {
-  icon?: object|null
+  icon?: object | null
 }
 
 const props = defineProps<ComponentProps>()

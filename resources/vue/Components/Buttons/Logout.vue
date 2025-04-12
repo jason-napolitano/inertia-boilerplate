@@ -12,7 +12,7 @@ import { router } from '@inertiajs/vue3'
 const logoutAction = () => {
   ElMessageBox.confirm('This will terminate your current session. Continue?', {
     confirmButtonText: 'OK',
-    cancelButtonText: 'Cancel'
+    cancelButtonText: 'Cancel',
   }).then(() => {
     router.post(route('logout'), {
       preserveScroll: true,

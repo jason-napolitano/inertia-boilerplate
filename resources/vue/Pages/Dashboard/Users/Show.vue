@@ -398,7 +398,6 @@ const submitRoleChange = (e) => {
     },
     onSuccess: () => (currentRole.value = e),
     showProgress: false,
-    preserveState: true,
     preserveScroll: true,
   })
 }

@@ -168,7 +168,7 @@ namespace App\Http\Controllers\Dashboard {
                 $user->save();
 
                 // return the success message
-                $request->session()->flash('message', 'The image or this user has been successfully uploaded.');
+                $request->session()->flash('message', 'The image for this user has been successfully uploaded.');
             }
             // return an error message
             $request->session()->flash('message', 'Something went wrong while trying to upload the image.');
@@ -192,7 +192,7 @@ namespace App\Http\Controllers\Dashboard {
             $user->save();
 
             // return the success message
-            $request->session()->flash('message', 'The image or this user has been successfully updated.');
+            $request->session()->flash('message', 'The image for this user has been successfully updated.');
 
             return back();
         }
@@ -210,7 +210,7 @@ namespace App\Http\Controllers\Dashboard {
             $user->syncRoles([$request['role']]);
 
             // return the success message
-            $request->session()->flash('message', 'The role or this user has been successfully updated.');
+            $request->session()->flash('message', 'The role for this user has been successfully updated.');
         }
     }
 }

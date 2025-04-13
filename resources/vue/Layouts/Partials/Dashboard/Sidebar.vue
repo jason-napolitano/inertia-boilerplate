@@ -1,42 +1,54 @@
 <template>
-  <aside :class="{ 'w-60': !sidebar.collapsed, 'w-16.5': sidebar.collapsed }">
-    <div class="flex items-center justify-center py-4">
-      <SidebarLogo :icon="ListTodo" />
-    </div>
-    <el-menu :collapse="sidebar.collapsed" :unique-opened="true">
-      <el-sub-menu
-        v-for="(sidebarItem, mainIndex) in sidebarItems"
-        :index="mainIndex"
-      >
-        <template #title>
-          <el-icon>
-            <SidebarIcon :icon="sidebarItem.icon"></SidebarIcon>
-          </el-icon>
-          <span>
-            {{ sidebarItem.title }}
-          </span>
-        </template>
-        <el-menu-item
-          v-for="(child, childIndex) in sidebarItem.children"
-          :index="mainIndex + '-' + childIndex"
+  <Transition name="slide-in-out">
+    <aside :class="{ 'w-60': !sidebar.collapsed, 'w-16.5': sidebar.collapsed }">
+      <div class="flex items-center justify-center py-4">
+        <SidebarLogo :icon="ListTodo" />
+      </div>
+      <el-menu :collapse="sidebar.collapsed" :unique-opened="true">
+        <el-sub-menu
+          v-for="(sidebarItem, mainIndex) in sidebarItems"
+          :index="mainIndex"
         >
-          <Link :href="route(child.route as string)" class="flex w-full">
-            {{ child.title }}
-          </Link>
-        </el-menu-item>
-      </el-sub-menu>
-    </el-menu>
-  </aside>
+          <template #title>
+            <el-icon>
+              <SidebarIcon :icon="sidebarItem.icon"></SidebarIcon>
+            </el-icon>
+            <span>
+              {{ sidebarItem.title }}
+            </span>
+          </template>
+          <el-menu-item
+            v-for="(child, childIndex) in sidebarItem.children"
+            :index="mainIndex + '-' + childIndex"
+          >
+            <Link
+              class="flex justify-start items-center w-full pl-7"
+              :href="route(child.route as string)"
+            >
+              <SidebarIcon
+                v-if="!sidebar.collapsed"
+                :icon="ChevronsRight"
+                class="h-3.5"
+              />
+              <span>
+                {{ child.title }}
+              </span>
+            </Link>
+          </el-menu-item>
+        </el-sub-menu>
+      </el-menu>
+    </aside>
+  </Transition>
 </template>
 
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
+import { ListTodo, ChevronsRight } from 'lucide-vue-next'
 import { useSidebarStore } from '@/Stores/sidebarStore'
 import { useSidebar } from '@/Composables/useSidebar'
 import SidebarIcon from './Sidebar/Icon.vue'
 import SidebarLogo from './Sidebar/Logo.vue'
-import { ListTodo } from 'lucide-vue-next'
 
 // --------------------------------------------------------
 // sidebar state
@@ -57,6 +69,10 @@ const { sidebarItems } = useSidebar()
     h-screen;
 }
 
+.el-menu-item {
+  padding-left: 0 !important;
+}
+
 aside {
   @apply dark:border-stone-900
     dark:text-stone-200
@@ -65,9 +81,35 @@ aside {
     text-stone-700
     bg-[#F5F7FA]
     justify-start
-    transition
     flex-col
     border-r
     flex;
+}
+/* Transition classes */
+.slide-in-out-enter-active,
+.slide-in-out-leave-active {
+  transition:
+    transform 0.5s ease-in-out,
+    opacity 0.5s ease-in-out;
+}
+
+.slide-in-out-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-in-out-enter-to {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.slide-in-out-leave-from {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.slide-in-out-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
 }
 </style>

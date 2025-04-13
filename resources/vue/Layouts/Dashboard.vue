@@ -53,7 +53,7 @@ import { Head } from '@inertiajs/vue3'
 // --------------------------------------------------------
 // component props
 interface ComponentProps {
-  title: string | null
+  title?: string | null
 }
 
 const props = withDefaults(defineProps<ComponentProps>(), {

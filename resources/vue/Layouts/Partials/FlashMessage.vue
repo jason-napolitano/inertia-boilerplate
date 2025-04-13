@@ -18,7 +18,7 @@ const { flash } = usePage().props as PageProps
 // --------------------------------------------------------
 // component props
 interface ComponentProps {
-  closable: boolean
+  closable?: boolean
   timeout?: number
 }
 

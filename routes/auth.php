@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::resource('register', RegisteredUserController::class);
-    Route::resource('login', AuthenticatedSessionController::class);
+    Route::resource('login', AuthenticatedSessionController::class)->names([
+        'index' => 'login',
+    ]);
 });
 
 Route::middleware('auth')->group(function () {

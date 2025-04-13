@@ -34,7 +34,8 @@
           </el-image>
           <div class="img-footer">
             <small>
-              <strong>Joined:</strong> {{ date.timeAgo(props.user['created_at']) }}
+              <strong>Joined:</strong>
+              {{ date.timeAgo(props.user['created_at']) }}
             </small>
             <small>
               <strong>Role:</strong> {{ string.ucFirst(currentRole) }}

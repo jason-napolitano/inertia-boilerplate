@@ -59,7 +59,7 @@ namespace App\Http\Controllers\Auth {
             $request->session()->flash('message', 'You have been logged out of your account.');
 
             // redirect to the login page
-            return to_route('login.index');
+            return to_route('login');
         }
     }
 }

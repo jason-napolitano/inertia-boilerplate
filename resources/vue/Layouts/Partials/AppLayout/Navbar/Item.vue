@@ -16,14 +16,14 @@
 <script setup lang="ts">
 // --------------------------------------------------------
 // imports
-import { useMarkup } from '@/Composables/useMarkup'
+import { useMarkup } from '@/Composables/useMarkup' // --------------------------------------------------------
 
 // --------------------------------------------------------
 // component props
 interface ComponentProps {
-  to: string | null
+  to?: string | null
+  link?: boolean
   text: string
-  link: boolean
 }
 
 const props = withDefaults(defineProps<ComponentProps>(), {
@@ -41,26 +41,25 @@ li span a,
 li span,
 li a {
   @apply inline-block
+    hover:dark:text-blue-400
     hover:border-b-red-300
-    hover:border-b-2
+    dark:text-stone-200
+    border-transparent
     duration-300
     align-middle
     ease-in-out
     transition
+    border-b-2
     my-auto
     px-2
-    py-1
-    /** dark mode **/
-    hover:dark:text-blue-400
-    dark:text-stone-200;
+    py-1;
 }
 
 .is-active {
   @apply border-b-2
+    dark:hover:border-b-red-300
     hover:border-b-red-500
-    border-b-red-500
-    /** dark mode **/
-  dark:hover:border-b-red-300
-  dark:border-b-red-300;
+    dark:border-b-red-300
+    border-b-red-500;
 }
 </style>

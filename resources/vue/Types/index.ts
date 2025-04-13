@@ -49,11 +49,16 @@ export type PageProps<
   }
 }
 
-export type SidebarItem = {
+export type SidebarParentItem = {
   title?: string | null
   route?: string | null
   icon?: object | null
-  children?: SidebarItem[] | null
+  children?: SidebarChildItem[] | null
+}
+
+export type SidebarChildItem = {
+  title?: string | null
+  route?: string | null
 }
 
 export interface UserRole {

@@ -78,12 +78,17 @@
             <Link
               :href="route('users.show', scope.row)"
               class="el-button el-button--small"
+              as="button"
             >
               <el-icon>
                 <UserFilled />
               </el-icon>
             </Link>
-            <el-button @click="deleteUser(scope.row)" type="danger">
+            <el-button
+              @click="deleteUser(scope.row)"
+              type="danger"
+              :disabled="!can('delete_user')"
+            >
               <el-icon>
                 <Delete />
               </el-icon>

@@ -11,7 +11,7 @@ export const useSidebarStore = defineStore(
     const collapsed = ref<boolean>(true)
 
     // is the sidebar shown?
-    const isShown = ref<boolean>(false)
+    const isShown = ref<boolean>(true)
 
     // --------------------------------------------------------------
     // actions
